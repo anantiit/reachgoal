@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+
+  <Appenders>
+
+    <File name="jsonLogger" fileName="/mnt/logs/logJson.log">
+
+      <JSONLayout compact="true" eventEol="true" />
+
+    </File>
+    <File name="debugLogger" fileName="/mnt/logs/logDebug.log">
+
+      <PatternLayout />
+
+    </File>
+  </Appenders>
+
+  <Loggers>
+
+    <Root level="trace">
+
+      <AppenderRef ref="jsonLogger"/>
+      <AppenderRef ref="debugLogger"/>
+
+    </Root>
+
+  </Loggers>
+
+</Configuration>
+
+
