@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+<!--  
+	<context:property-placeholder
+		location="classpath*:utils-${my.env}.properties, classpath*:core-cass-${my.env}.properties,
+            		classpath*:core-iam-${my.env}.properties,classpath*:core-lib-${my.env}.properties, classpath*:core-redshift-${my.env}.properties,classpath*:ee-savings-${my.env}.properties, classpath:images.properties"
+		system-properties-mode="OVERRIDE" />
+
+	<import resource="classpath*:utils.xml" />
+	<import resource="classpath*:core-cass.xml" />
+	<import resource="classpath*:core-lib.xml" />
+	<import resource="classpath*:core-iam.xml" />
+	
+-->
+
+
+	<bean id="employee" class="com.spring.spring.Employee" init-method="myInit" destroy-method="myDestroy">
+		<property name="eid" value="B084" /> <!-- populating properties using setters -->
+		<constructor-arg name="eName" value="Naidu"/> <!-- populating properties using constructor -->
+		<constructor-arg name="eSalary" value="30000"/>
+		<constructor-arg name="address" ref="address"/>
+	</bean>
+	
+	<bean id="address" class="com.spring.spring.Address">
+		<constructor-arg name="city" value="Bangalore" />
+		<constructor-arg name="street" value="Marathalli"/>
+		<constructor-arg name="zipCode" value="560037"/>
+	</bean>
+
+</beans>
