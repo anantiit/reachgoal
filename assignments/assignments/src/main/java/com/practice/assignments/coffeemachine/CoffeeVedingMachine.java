@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadFactory;
 import com.google.gson.Gson;
 import com.practice.assignments.coffeemachine.data.Machine;
 import com.practice.assignments.coffeemachine.data.MachineWrapper;
-import com.practice.assignments.coffeemachine.utils.ThreadExecutor;
+import com.practice.assignments.utils.ThreadExecutor;
 
 public class CoffeeVedingMachine {
 	private static String filePath;

@@ -1,4 +1,4 @@
-package com.practice.assignments;
+package com.practice.assignments.stockexchange;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,7 +14,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-public class StockExchange {
+import com.practice.assignments.utils.Daemonizer;
+import com.practice.assignments.utils.ThreadExecutor;
+
+public class StockExchange extends Daemonizer {
 
 	private static String filePath;
 	private static String DELIMETER = " ";
@@ -24,6 +27,7 @@ public class StockExchange {
 	private static final String DATE_TIME_FORMAT = "dd-mm-yyyy HH:mm";
 	private static final long MILLI_SEC_IN_SEC = 1000L;
 	private static final String BUY_ORDER = "buy";
+	private static final int ORDER_INPUT_LENGTH = 6;
 
 	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
 	private static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat(DATE_TIME_FORMAT);
@@ -54,12 +58,22 @@ public class StockExchange {
 
 	private OrderStatus processOrder(Order order) {
 		OrderStatus orderStatus = OrderStatus.OPEN;
+		final ExecutorService executorService = Executors.(machine.getOutlets().getOutLetCount(),
+				new ThreadFactory() {
+					@Override
+					public Thread newThread(Runnable r) {
+						final Thread t = Executors.defaultThreadFactory().newThread(r);
+						t.setDaemon(true);
+						return t;
+					}
+				});
+		final ThreadExecutor outLetExecutor = new ThreadExecutor(executorService);
 		return orderStatus;
 	}
 
 	private Order validateAndGetOrder(String[] orderDetails) throws ParseException {
 		Order order = null;
-		if (orderDetails.length == 6) {
+		if (orderDetails.length == ORDER_INPUT_LENGTH) {
 			String number = orderDetails[0];
 			String time = orderDetails[1];
 			String stockName = orderDetails[2];

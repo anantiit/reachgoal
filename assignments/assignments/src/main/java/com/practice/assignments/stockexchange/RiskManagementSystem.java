@@ -1,4 +1,4 @@
-package com.practice.assignments;
+package com.practice.assignments.stockexchange;
 
 public class RiskManagementSystem implements IRiskManagementSystem {
 

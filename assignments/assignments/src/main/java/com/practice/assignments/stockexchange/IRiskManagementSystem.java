@@ -1,4 +1,4 @@
-package com.practice.assignments;
+package com.practice.assignments.stockexchange;
 
 public interface IRiskManagementSystem {
 	public boolean isCapitalAdequate(Order order);
