@@ -1,19 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
                 <groupId>com.reachgoal</groupId>
                 <artifactId>reachgoal</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
   </parent>
-  
-  <groupId>com.reachgoal.datastructures</groupId>
-  <artifactId>datastructures</artifactId>
+        
+  <groupId>com.reachgoal.assignments</groupId>
+  <artifactId>assignments</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>datastructures</name>
+
+  <name>assignments</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -21,5 +26,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+     <dependency>
+			<groupId>org.slf4j</groupId>
+			<version>LATEST</version>
+			<artifactId>slf4j-api</artifactId>
+	</dependency>
   </dependencies>
 </project>
