@@ -19,6 +19,7 @@
                 <module>datastructures</module>
                 <module>hackathonBidgely</module>
                 <module>spark-poc</module>
+                <module>core-utils</module>
                 <module>spring</module>
                 <module>assignments</module>
         </modules>
