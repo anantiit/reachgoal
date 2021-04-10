@@ -2,28 +2,18 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-                <groupId>com.reachgoal</groupId>
-                <artifactId>reachgoal</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-  </parent>
-        
-  <groupId>com.reachgoal.assignments</groupId>
-  <artifactId>assignments</artifactId>
-  <packaging>pom</packaging>
+  <groupId>com.reachgoal.core-utils</groupId>
+  <artifactId>core-utils</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-  <name>assignments</name>
+  <name>core-utils</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-<modules>
-                <module>coffeemachine</module>
 
-                <module>stockexchange</module>
-</modules>
-        
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -31,7 +21,7 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-     <dependency>
+    <dependency>
 			<groupId>org.slf4j</groupId>
 			<version>LATEST</version>
 			<artifactId>slf4j-api</artifactId>

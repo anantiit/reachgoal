@@ -1,4 +1,4 @@
-package com.reachgoal.assignments.utils;
+package com.reachgoal.core_utils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;

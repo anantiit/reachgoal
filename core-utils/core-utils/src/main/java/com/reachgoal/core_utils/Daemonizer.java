@@ -1,4 +1,4 @@
-package com.reachgoal.assignments.utils;
+package com.reachgoal.core_utils;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -16,7 +16,6 @@ public class Daemonizer {
 	public void init() {
 		for (final Callable<Boolean> t : tasks) {
 			executor.execute(new Runnable() {
-				@Override
 				public void run() {
 					while (!shutdown) {
 						try {

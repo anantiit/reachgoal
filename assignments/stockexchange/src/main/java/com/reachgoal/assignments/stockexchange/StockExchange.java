@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import com.reachgoal.assignments.utils.Daemonizer;
+import com.reachgoal.core_utils.Daemonizer;
 
 public class StockExchange extends Daemonizer {
 

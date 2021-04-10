@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadFactory;
 import com.google.gson.Gson;
 import com.reachgoal.assignments.coffeemachine.data.Machine;
 import com.reachgoal.assignments.coffeemachine.data.MachineWrapper;
-import com.reachgoal.assignments.utils.ThreadExecutor;
+import com.reachgoal.core_utils.ThreadExecutor;
 
 
 public class CoffeeVedingMachine {
