@@ -6,13 +6,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.PosixParser;
+import org.springframework.context.ApplicationContext;
 
 import com.reachgoal.core_utils.Daemonizer;
 
@@ -58,6 +68,66 @@ public class StockExchange extends Daemonizer {
 	private OrderStatus processOrder(Order order) {
 		OrderStatus orderStatus = OrderStatus.OPEN;
 		return orderStatus;
+	}
+	
+	
+	
+	protected void runDaemons(ApplicationContext context, String[] args) throws ParseException {
+		final Options options = new Options();
+		final Option tasksOption = new Option(EMAILERS, true, "Emailer tasks to be run");
+		final Option threadsOption = new Option(COUNTS, true, "Number of threads for each task");
+		final Option countForAllOption = new Option(COUNT_FOR_ALL, true, "Number for threads for all emailers");
+		options.addOption(tasksOption);
+		options.addOption(threadsOption);
+		options.addOption(countForAllOption);
+		CommandLine cmdLine = null;
+
+		final CommandLineParser parser = new PosixParser();
+		try {
+			cmdLine = parser.parse(options, args);
+		} catch (final ParseException e1) {
+			logger.error("Error parsing the arguments", e1);
+			throw e1;
+		}
+
+		List<String> tasks = new ArrayList<>();
+		if (cmdLine.hasOption(EMAILERS)) {
+			tasks = Arrays.asList(cmdLine.getOptionValues(EMAILERS));
+		}
+
+		List<String> counts = new ArrayList<>();
+		String countForAll = null;
+		if (cmdLine.hasOption(COUNT_FOR_ALL)) {
+			countForAll = cmdLine.getOptionValue(COUNT_FOR_ALL);
+		} else if (cmdLine.hasOption(COUNTS)) {
+			counts = Arrays.asList(cmdLine.getOptionValues(COUNTS));
+		}
+
+		if (!tasks.isEmpty()) {
+			final List<String> taskArgs = Arrays.asList(cmdLine.getOptionValues(EMAILERS));
+			logger.info("Intitializing EmailerDaemon with emailers specified in arguments: " + taskArgs);
+			if (countForAll != null) {
+				setTasks(getTasks(taskArgs, countForAll, context));
+			} else {
+				setTasks(getTasks(taskArgs, counts, context));
+			}
+		} else {
+			logger.info("Intitializing EmailerDaemon with tasks: " + this.tasks);
+			if (countForAll != null) {
+				setTasks(getTasks(this.tasks, Integer.valueOf(countForAll)));
+			} else {
+				setTasks(this.tasks);
+			}
+		}
+
+		setExecutor(Executors.newFixedThreadPool(getTasks().size()));
+
+		try {
+			init();
+		} catch (final Throwable e) {
+			logger.error("Error while running emailer daemon", e);
+			throw e;
+		}
 	}
 
 	private Order validateAndGetOrder(String[] orderDetails) throws ParseException {
