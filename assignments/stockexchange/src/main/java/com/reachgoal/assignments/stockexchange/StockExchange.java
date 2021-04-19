@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,10 +16,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.reachgoal.core_utils.Daemonizer;
 
 public class StockExchange extends Daemonizer {
-
+	private static final Logger logger = LoggerFactory.getLogger(Daemonizer.class);
 	private static String filePath;
 	private static String DELIMETER = " ";
 	public static final Set<String> companyCodes = new HashSet<String>();
@@ -66,25 +68,9 @@ public class StockExchange extends Daemonizer {
 	protected void runDaemons() throws ParseException {
 
 		List<String> tasks = new ArrayList<>();
-		if (!tasks.isEmpty()) {
-			final List<String> taskArgs = Arrays.asList(cmdLine.getOptionValues(EMAILERS));
-			logger.info("Intitializing EmailerDaemon with emailers specified in arguments: " + taskArgs);
-			if (countForAll != null) {
-				setTasks(getTasks(taskArgs, countForAll, context));
-			} else {
-				setTasks(getTasks(taskArgs, counts, context));
-			}
-		} else {
-			logger.info("Intitializing EmailerDaemon with tasks: " + this.tasks);
-			if (countForAll != null) {
-				setTasks(getTasks(this.tasks, Integer.valueOf(countForAll)));
-			} else {
-				setTasks(this.tasks);
-			}
-		}
-
+		logger.info("Intitializing EmailerDaemon with tasks: " + this.tasks);
+		setTasks(getTasks(this.tasks, Integer.valueOf()));
 		setExecutor(Executors.newFixedThreadPool(getTasks().size()));
-
 		try {
 			init();
 		} catch (final Throwable e) {

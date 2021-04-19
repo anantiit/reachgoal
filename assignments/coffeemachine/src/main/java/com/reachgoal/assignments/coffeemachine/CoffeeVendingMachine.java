@@ -18,7 +18,7 @@ import com.reachgoal.assignments.coffeemachine.data.MachineWrapper;
 import com.reachgoal.core_utils.ThreadExecutor;
 
 
-public class CoffeeVedingMachine {
+public class CoffeeVendingMachine {
 	private static String filePath;
 	public static String TEST_DIRECTORY = "src/main/resources/";
 
@@ -30,7 +30,7 @@ public class CoffeeVedingMachine {
 		try (FileReader reader = new FileReader(TEST_DIRECTORY + filePath)) {
 			Gson gson = new Gson();
 			MachineWrapper machine = gson.fromJson(reader, MachineWrapper.class);
-			final CoffeeVedingMachine coffeeMachine = new CoffeeVedingMachine();
+			final CoffeeVendingMachine coffeeMachine = new CoffeeVendingMachine();
 			coffeeMachine.runCoffeeVedingMachine(machine.getMachine());
 		} catch (final FileNotFoundException e) {
 			System.out.println(filePath + " file not found. Hence exiting..");

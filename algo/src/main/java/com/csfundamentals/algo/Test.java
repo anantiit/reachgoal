@@ -12,10 +12,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 import java.util.Stack;
 import java.util.TimeZone;
 import java.util.TreeMap;
-import java.util.UUID;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.http.HttpResponse;
@@ -30,10 +30,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.bidgely.cloud.core.api.domain.MeasurementType;
-import com.bidgely.cloud.core.cass.dao.HK;
-import com.bidgely.cloud.core.cass.dao.ZipKey;
-import com.sun.jersey.api.uri.UriTemplate;
 //import com.netflix.astyanax.serializers.AnnotatedCompositeSerializer;
 
 public class Test {
@@ -65,12 +61,22 @@ public class Test {
 		// // country, email.split("@")[0].split("\\+")[1]);
 		//
 		// }
-		final HK rowKey = new HK(UUID.fromString("154ce6a8-3b5a-492e-b78a-5876b7924fe0"), 1);
-		System.out.println(rowKey.hashCode());
-		for (int i = 0; i < 10; ++i) {
-			System.out.println(i);
-		}
-		System.out.println(MeasurementType.GAS.getPublicName().equals("Gas"));
+		PriorityQueue<String> pq = new PriorityQueue<>();
+		 
+        pq.add("Geeks");
+        pq.add("For");
+        pq.add("Geeks");
+ 
+        Iterator iterator = pq.iterator();
+ 
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + " ");
+//		//final HK rowKey = new HK(UUID.fromString("154ce6a8-3b5a-492e-b78a-5876b7924fe0"), 1);
+//		System.out.println(rowKey.hashCode());
+//		for (int i = 0; i < 10; ++i) {
+//			System.out.println(i);
+//		}
+//		System.out.println(MeasurementType.GAS.getPublicName().equals("Gas"));
 		int[] arr = { 1, 4, 3, 2, 5, 6, 9 };
 		int K = 12;
 		findIfAPairExistInArrayWhichSumToK(arr, K);
@@ -93,12 +99,12 @@ public class Test {
 
 		System.out.println("a " + a + "b " + b);
 
-		final ZipKey zipKey = new ZipKey("US", "6907");
-
-		final ZipKey zk2 = new ZipKey("US", "6907");
-		// System.out.println(Hex.bytesToHex(ZipKey.SERIALIZER.toBytes(zk2));
-
-		System.out.println(zipKey.hashCode());
+//		final ZipKey zipKey = new ZipKey("US", "6907");
+//
+//		final ZipKey zk2 = new ZipKey("US", "6907");
+//		// System.out.println(Hex.bytesToHex(ZipKey.SERIALIZER.toBytes(zk2));
+//
+//		System.out.println(zipKey.hashCode());
 
 		// final ColumnFamilyQuery<ZipKey, String> nq =
 		// keyspace.prepareQuery(ZipColumnFamilies.CF_ZIPCODE_DATA);
@@ -280,11 +286,10 @@ public class Test {
 	}
 
 	/**
-	 * This method returns previous year epoch for the same date and month.
-	 * input should be date with out year in the format dd-mm
+	 * This method returns previous year epoch for the same date and month. input
+	 * should be date with out year in the format dd-mm
 	 * 
-	 * @param dateWithOutYear
-	 *            (dateformat dd-mm)
+	 * @param dateWithOutYear (dateformat dd-mm)
 	 * @param timeZone
 	 * @return
 	 */
@@ -304,8 +309,7 @@ public class Test {
 	 * This method returns current year epoch for the same date and month. input
 	 * should be date with out year in the format dd-mm
 	 * 
-	 * @param dateWithOutYear
-	 *            (dateformat dd-mm)
+	 * @param dateWithOutYear (dateformat dd-mm)
 	 * @param timeZone
 	 * @return
 	 */
@@ -458,8 +462,7 @@ public class Test {
 	}
 
 	private enum AccountStatusDescription {
-		ACTIVE,
-		INACTIVE;
+		ACTIVE, INACTIVE;
 
 	}
 }
