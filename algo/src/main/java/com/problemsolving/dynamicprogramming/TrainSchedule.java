@@ -1,4 +1,4 @@
-package com.problemsolving.dynamicprogramming.algo;
+package com.problemsolving.dynamicprogramming;
 
 import java.util.Arrays;
 import java.util.Set;

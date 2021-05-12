@@ -17,7 +17,6 @@ import com.reachgoal.assignments.coffeemachine.data.Machine;
 import com.reachgoal.assignments.coffeemachine.data.MachineWrapper;
 import com.reachgoal.core_utils.ThreadExecutor;
 
-
 public class CoffeeVendingMachine {
 	private static String filePath;
 	public static String TEST_DIRECTORY = "src/main/resources/";

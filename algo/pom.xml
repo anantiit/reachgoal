@@ -12,33 +12,12 @@
   <artifactId>algo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-	<url>http://www.bidgely.com/</url>
+	<url>http://www.naidu.com/</url>
 	<properties>
 		<maven.surefire.version>2.18.1</maven.surefire.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>net.sf.opencsv</groupId>
-				<artifactId>opencsv</artifactId>
-				<version>2.3</version>
-			</dependency>
-			<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-math3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-solrj</artifactId>
-		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

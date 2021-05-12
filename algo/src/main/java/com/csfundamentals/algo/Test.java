@@ -30,6 +30,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.sun.jersey.api.uri.UriTemplate;
+
 //import com.netflix.astyanax.serializers.AnnotatedCompositeSerializer;
 
 public class Test {
@@ -47,8 +49,28 @@ public class Test {
 		b = new Double(3.4d);
 	}
 
+	static String isValid(String s) {
+		char[] charArr = s.toCharArray();
+		int[] charCountArr = new int[26];
+		for (char c : charArr) {
+			charCountArr[(int) c - 99]++;
+		}
+		int counter = 0;
+		for (int i = 0; i < 26; i++) {
+			if (charCountArr[i] > 1) {
+				counter++;
+			}
+			if (counter > 2) {
+				return "NO";
+			}
+		}
+		return "YES";
+
+	}
+
 	public static void main(String[] args) throws Exception {
 
+		System.out.println((int) 'a');
 		// CSVReader csvReader = new CSVReader(new FileReader(new
 		// File("/Users/aashish/Downloads/userList1.csv")));
 		// List<String[]> csv = csvReader.readAll();
@@ -62,42 +84,43 @@ public class Test {
 		//
 		// }
 		PriorityQueue<String> pq = new PriorityQueue<>();
-		 
-        pq.add("Geeks");
-        pq.add("For");
-        pq.add("Geeks");
- 
-        Iterator iterator = pq.iterator();
- 
-        while (iterator.hasNext()) {
-            System.out.print(iterator.next() + " ");
+
+		pq.add("Geeks");
+		pq.add("For");
+		pq.add("Geeks");
+
+		Iterator iterator = pq.iterator();
+
+		while (iterator.hasNext()) {
+			System.out.print(iterator.next() + " ");
 //		//final HK rowKey = new HK(UUID.fromString("154ce6a8-3b5a-492e-b78a-5876b7924fe0"), 1);
 //		System.out.println(rowKey.hashCode());
 //		for (int i = 0; i < 10; ++i) {
 //			System.out.println(i);
 //		}
 //		System.out.println(MeasurementType.GAS.getPublicName().equals("Gas"));
-		int[] arr = { 1, 4, 3, 2, 5, 6, 9 };
-		int K = 12;
-		findIfAPairExistInArrayWhichSumToK(arr, K);
-		String s = "###ab#b";
-		String t = "aab##b###abb";
-		if (checkStringEqualGivenBackspaces(s, t)) {
-			System.out.println("\ntrue");
-		} else {
-			System.out.println("\nfalse");
-		}
-		Hex h = new Hex();
-		String hexcodestr = "44495341424c4544";
-		char[] hexcode = hexcodestr.toCharArray();
-		System.out.println(h.toString());
-		Double a = 0.7d;
-		Double b = 0.8d;
-		System.out.println("a " + a + "b " + b);
-		modifyValues(a, b);
-		System.out.println("a " + a + "b " + b);
+			int[] arr = { 1, 4, 3, 2, 5, 6, 9 };
+			int K = 12;
+			findIfAPairExistInArrayWhichSumToK(arr, K);
+			String s = "###ab#b";
+			String t = "aab##b###abb";
+			t.toCharArray();
+			if (checkStringEqualGivenBackspaces(s, t)) {
+				System.out.println("\ntrue");
+			} else {
+				System.out.println("\nfalse");
+			}
+			Hex h = new Hex();
+			String hexcodestr = "44495341424c4544";
+			char[] hexcode = hexcodestr.toCharArray();
+			System.out.println(h.toString());
+			Double a = 0.7d;
+			Double b = 0.8d;
+			System.out.println("a " + a + "b " + b);
+			modifyValues(a, b);
+			System.out.println("a " + a + "b " + b);
 
-		System.out.println("a " + a + "b " + b);
+			System.out.println("a " + a + "b " + b);
 
 //		final ZipKey zipKey = new ZipKey("US", "6907");
 //
@@ -106,103 +129,104 @@ public class Test {
 //
 //		System.out.println(zipKey.hashCode());
 
-		// final ColumnFamilyQuery<ZipKey, String> nq =
-		// keyspace.prepareQuery(ZipColumnFamilies.CF_ZIPCODE_DATA);
+			// final ColumnFamilyQuery<ZipKey, String> nq =
+			// keyspace.prepareQuery(ZipColumnFamilies.CF_ZIPCODE_DATA);
 
-		long epochTime = 1600656106173L;
-		// final String eventDate =
-		// DateUtils.getDateInGivenFormatFromEpochLong(epochTime,
-		// TimeZone.getTimeZone(DUKE_TIMEZONE),
-		// DateFormat.MONTH_DAY_YEAR_TIME_SLASH);
-		// System.out.println(eventDate);
+			long epochTime = 1600656106173L;
+			// final String eventDate =
+			// DateUtils.getDateInGivenFormatFromEpochLong(epochTime,
+			// TimeZone.getTimeZone(DUKE_TIMEZONE),
+			// DateFormat.MONTH_DAY_YEAR_TIME_SLASH);
+			// System.out.println(eventDate);
 
-		System.out.println("\\'" + "OPT_IN" + "\\'");
-		String startTime = "2020-09-22";
-		final TimeZone utilityInvoiceTimeZone = TimeZone.getTimeZone("");
-		// int startTimeEpoch = DateUtils.getTimestampFromDate(startTime,
-		// utilityInvoiceTimeZone, DEFAULT_DATE_FORMAT);
-		// System.out.println("startTimeEpoch" +
-		// startTimeEpoch);
-		List<Integer> decompressRLElist = new ArrayList<Integer>();
-		Double newNumber = 0d;
-		Double oldNumber = 100d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = 100d;
-		oldNumber = 150d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = 150d;
-		oldNumber = 100d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = null;
-		oldNumber = 100d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = 100d;
-		oldNumber = null;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = null;
-		oldNumber = null;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = 200d;
-		oldNumber = 100d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
-		newNumber = 100d;
-		oldNumber = 200d;
-		System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			System.out.println("\\'" + "OPT_IN" + "\\'");
+			String startTime = "2020-09-22";
+			final TimeZone utilityInvoiceTimeZone = TimeZone.getTimeZone("");
+			// int startTimeEpoch = DateUtils.getTimestampFromDate(startTime,
+			// utilityInvoiceTimeZone, DEFAULT_DATE_FORMAT);
+			// System.out.println("startTimeEpoch" +
+			// startTimeEpoch);
+			List<Integer> decompressRLElist = new ArrayList<Integer>();
+			Double newNumber = 0d;
+			Double oldNumber = 100d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = 100d;
+			oldNumber = 150d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = 150d;
+			oldNumber = 100d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = null;
+			oldNumber = 100d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = 100d;
+			oldNumber = null;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = null;
+			oldNumber = null;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = 200d;
+			oldNumber = 100d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
+			newNumber = 100d;
+			oldNumber = 200d;
+			System.out.println(calculateRoundedPercentageOfDifference(newNumber, oldNumber));
 
-		System.out.println(AccountStatusDescription.valueOf("ACTIVE"));
-		System.out.println(AccountStatusDescription.valueOf("active1"));
-		if (getPreviousYearTimestampWithGivenFormat("dd-MM", "09-09",
-				"Europe/Bratislava") == getPreviousYearSameDateEpoch("09-09", "Europe/Bratislava")) {
-			System.out.println("oohoo1");
+			System.out.println(AccountStatusDescription.valueOf("ACTIVE"));
+			System.out.println(AccountStatusDescription.valueOf("active1"));
+			if (getPreviousYearTimestampWithGivenFormat("dd-MM", "09-09",
+					"Europe/Bratislava") == getPreviousYearSameDateEpoch("09-09", "Europe/Bratislava")) {
+				System.out.println("oohoo1");
+			}
+			if (getCurrentYearDateEpoch("09-09", "Europe/Bratislava") == getCurrentYearTimestampWithGivenFormat("dd-MM",
+					"09-09", "Europe/Bratislava")) {
+				System.out.println("oohoo2");
+			}
+			System.out.println(getPreviousYearTimestampWithGivenFormat("dd-MM", "32-09", "Europe/Bratislava"));
+			System.out.println(getPreviousYearSameDateEpoch("32-09", "Europe/Bratislava"));
+			System.out.println(getCurrentYearTimestampWithGivenFormat("dd-MM", "06-12", "Europe/Bratislava"));
+			System.out.println(getCurrentYearDateEpoch("06-12", "Europe/Bratislava"));
+
+			String subject = "Domácnosti ako Vaša spotrebujú v zime na kúrenie o %s %% menejelektrickej energie.";
+			String subject1 = "Pripravte sa na komfortnú zimu. Pripravte sa, aby ste zimu prežili komfortne.";
+			if (!subject.contains("%s")) {
+				System.out.println("Does not Contains variable");
+			} else {
+				System.out.println("Contains variable");
+			}
+			addTrackingParams(
+					"https://www1.elektrozoom.sk/form/?utm_source=email&amp;utm_campaign=bidgely&amp;linktype=afeaf&amp;code=NBgfolLlIFYmoaabxhQgjzr4;iC4fqfY$E5ShArSr;PhDAlK2tHWlclEEjVcFIAFr$");
+
+			// System.out.println("Last year epoch for the same date: " +
+			// getPreviousYearTimestamp(date, timezone));
+			System.out.println(getUnicodeRepresentation(";"));
+			System.out.println(addTrackingParams(
+					"https://www1.elektrozoom.sk/form/?utm_source=email&amp;utm_campaign=bidgely&amp;linktype=afeaf&amp;code=NBgfolLlIFYmoaabxhQgjzr4;iC4fqfY$E5ShArSr;PhDAlK2tHWlclEEjVcFIAFr$"));
+			replaceURIVariables();
+
+			Map<Integer, Integer> testMap = new HashMap<Integer, Integer>();
+			for (Entry<Integer, Integer> entry : testMap.entrySet()) {
+				System.out.println("printing");
+				System.out.println(entry);
+			}
+			A ref = new A(5);
+
+			System.out.println(ref.val);
+			ref = new A(6);
+			System.out.println(ref.val);
+			changeRef(ref);
+			System.out.println(ref.val);
+
+			String hybridConfig = "true";
+			if (true || false || false && false) {
+
+				System.out.println("Going in..");
+			}
+			String url = "http://eonpatapi.bidgely.com/meta/users/" + "14f3fcf9-31c7-4fba-9faa-be5168243ca5"
+					+ "/homes/1/modified";
+			getCall(url);
+
 		}
-		if (getCurrentYearDateEpoch("09-09", "Europe/Bratislava") == getCurrentYearTimestampWithGivenFormat("dd-MM",
-				"09-09", "Europe/Bratislava")) {
-			System.out.println("oohoo2");
-		}
-		System.out.println(getPreviousYearTimestampWithGivenFormat("dd-MM", "32-09", "Europe/Bratislava"));
-		System.out.println(getPreviousYearSameDateEpoch("32-09", "Europe/Bratislava"));
-		System.out.println(getCurrentYearTimestampWithGivenFormat("dd-MM", "06-12", "Europe/Bratislava"));
-		System.out.println(getCurrentYearDateEpoch("06-12", "Europe/Bratislava"));
-
-		String subject = "Domácnosti ako Vaša spotrebujú v zime na kúrenie o %s %% menejelektrickej energie.";
-		String subject1 = "Pripravte sa na komfortnú zimu. Pripravte sa, aby ste zimu prežili komfortne.";
-		if (!subject.contains("%s")) {
-			System.out.println("Does not Contains variable");
-		} else {
-			System.out.println("Contains variable");
-		}
-		addTrackingParams(
-				"https://www1.elektrozoom.sk/form/?utm_source=email&amp;utm_campaign=bidgely&amp;linktype=afeaf&amp;code=NBgfolLlIFYmoaabxhQgjzr4;iC4fqfY$E5ShArSr;PhDAlK2tHWlclEEjVcFIAFr$");
-
-		// System.out.println("Last year epoch for the same date: " +
-		// getPreviousYearTimestamp(date, timezone));
-		System.out.println(getUnicodeRepresentation(";"));
-		System.out.println(addTrackingParams(
-				"https://www1.elektrozoom.sk/form/?utm_source=email&amp;utm_campaign=bidgely&amp;linktype=afeaf&amp;code=NBgfolLlIFYmoaabxhQgjzr4;iC4fqfY$E5ShArSr;PhDAlK2tHWlclEEjVcFIAFr$"));
-		replaceURIVariables();
-
-		Map<Integer, Integer> testMap = new HashMap<Integer, Integer>();
-		for (Entry<Integer, Integer> entry : testMap.entrySet()) {
-			System.out.println("printing");
-			System.out.println(entry);
-		}
-		A ref = new A(5);
-
-		System.out.println(ref.val);
-		ref = new A(6);
-		System.out.println(ref.val);
-		changeRef(ref);
-		System.out.println(ref.val);
-
-		String hybridConfig = "true";
-		if (true || false || false && false) {
-
-			System.out.println("Going in..");
-		}
-		String url = "http://eonpatapi.bidgely.com/meta/users/" + "14f3fcf9-31c7-4fba-9faa-be5168243ca5"
-				+ "/homes/1/modified";
-		getCall(url);
-
 	}
 
 	private static Integer calculateRoundedPercentageOfDifference(Double newNumber, Double oldNumber) {
