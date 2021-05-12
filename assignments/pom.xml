@@ -22,6 +22,10 @@
                 <module>coffeemachine</module>
 
                 <module>stockexchange</module>
+                <module>looger</module>
+                <module>myntra</module>
+                <module>phonepe</module>
+                <module>parkinglot</module>
 </modules>
         
   <dependencies>
