@@ -30,6 +30,11 @@
 			<version>LATEST</version>
 			<artifactId>slf4j-api</artifactId>
 	</dependency>
+	<dependency>
+			<groupId>joda-time</groupId>
+			<version>LATEST</version>
+			<artifactId>joda-time</artifactId>
+		</dependency>
   </dependencies>
   <build>
     <plugins>

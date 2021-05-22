@@ -12,7 +12,6 @@ public class ParkingLotManager implements Runnable {
 		this.parkingLotUniqueID = parkingLotUniqueID;
 	}
 
-	@Override
 	public void run() {
 		try {
 			if (RequestType.PARK_VEHICLE == requestType) {

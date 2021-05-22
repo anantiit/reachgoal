@@ -20,12 +20,14 @@
   </properties>
 <modules>
                 <module>coffeemachine</module>
-
                 <module>stockexchange</module>
-                <module>looger</module>
+                <module>logger</module>
                 <module>myntra</module>
                 <module>phonepe</module>
+                <module>foodOrderingSystem</module>
                 <module>parkinglot</module>
+                <module>uber</module>
+                <module>razorpay</module>
 </modules>
         
   <dependencies>

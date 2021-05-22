@@ -16,7 +16,7 @@ import com.reachgoal.assignments.phonepe.entities.RentalPriceSortedSet;
 import com.reachgoal.assignments.phonepe.entities.Vehicle;
 import com.reachgoal.assignments.phonepe.model.VehicleType;
 
-public class BookingExecutor imple{
+public class BookingExecutor {
 	// private static final String DEFAULT_TIMEZONE = "Asia/Kolkata";
 	VehicleDao vehicleDao;
 	BookingSlotDao bookingSlotDao;

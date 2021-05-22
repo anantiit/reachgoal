@@ -10,6 +10,9 @@ public class ParkingLotMap {
 	}
 
 	public static ParkingLotMap getInstance() {
+		if (instance != null) {
+			return instance;
+		}
 		synchronized (ParkingLotMap.class) {
 			if (instance == null) {
 				instance = new ParkingLotMap();

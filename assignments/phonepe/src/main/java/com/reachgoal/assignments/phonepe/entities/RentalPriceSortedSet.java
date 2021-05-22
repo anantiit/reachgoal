@@ -20,6 +20,9 @@ public class RentalPriceSortedSet {
 	}
 
 	public static RentalPriceSortedSet getInstance() {
+		if (instance != null) {
+			return instance;
+		}
 		synchronized (RentalPriceSortedSet.class) {
 			if (instance == null) {
 				instance = new RentalPriceSortedSet();
