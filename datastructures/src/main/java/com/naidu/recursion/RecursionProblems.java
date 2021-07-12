@@ -4,7 +4,6 @@
  */
 package com.naidu.recursion;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class RecursionProblems {
@@ -38,7 +37,7 @@ public class RecursionProblems {
 
 	public void generateAllStringOfNbits(int n) {
 		if (n < 1) {
-			System.out.println(Arrays.toString(a));
+			// System.out.println(Arrays.toString(a));
 		} else {
 
 		}

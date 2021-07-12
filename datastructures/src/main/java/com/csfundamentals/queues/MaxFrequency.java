@@ -2,10 +2,12 @@ package com.csfundamentals.queues;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /*
- * Given a string of lowercase alphabets and a number k, the task is to print the minimum value of the string after removal of ‘k’ characters. The value of a string is defined as the sum of squares of the count of each distinct character. For example consider the string “saideep”, here frequencies of characters are s-1, a-1, i-1, e-2, d-1, p-1 and value of the string is 1^2 + 1^2 + 1^2 + 1^2 + 1^2 + 2^2 = 9.
+ * Given a string of lowercase alphabets and a number k, the task is to print the minimum value of the string after removal of ‘k’ characters. 
+ * The value of a string is defined as the sum of squares of the count of each distinct character.
+ * For example consider the string “saideep”, here frequencies of characters are s-1, a-1, i-1, e-2, d-1, p-1 and 
+ * value of the string is 1^2 + 1^2 + 1^2 + 1^2 + 1^2 + 2^2 = 9.
 Expected Time Complexity: O(k*logn)
 Examples: 
  
@@ -21,7 +23,7 @@ Asked In : Amazon
 */
 public class MaxFrequency {
 	public static int maxFrequencyCharRemoval(String s, int k) {
-		Queue<CharFreq> charQ = new PriorityQueue<CharFreq>();
+		PriorityQueue<CharFreq> charQ = new PriorityQueue<CharFreq>();
 		char[] charArr = s.toCharArray();
 		int[] freqArr = new int[26];
 		for (int i = 0; i < charArr.length; i++) {
@@ -36,10 +38,11 @@ public class MaxFrequency {
 		System.out.println(charQ);
 		for (int j = 0; j < k; j++) {
 			// Note : if we just peek() then the max/min priority queue does not adjust to
-			// keep the latest maa/min at the top.
+			// keep the latest max/min at the top.
 			CharFreq cf = charQ.poll();
-			charQ.add(cf);
 			cf.frequency--;
+			charQ.add(cf);
+			System.out.println(charQ);
 
 		}
 		System.out.println(charQ);
@@ -54,7 +57,7 @@ public class MaxFrequency {
 	}
 
 	public static void main(String args[]) {
-		String s = "abbbbcccccddeeeeee";
+		String s = "abbbbcccccddeeeee";
 		System.out.println(maxFrequencyCharRemoval(s, 3));
 	}
 

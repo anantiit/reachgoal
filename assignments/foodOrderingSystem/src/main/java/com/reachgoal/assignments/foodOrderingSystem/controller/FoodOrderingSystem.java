@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -36,8 +37,12 @@ public class FoodOrderingSystem {
 		MenuItem mItem2 = new MenuItem("A2B", "upma", 1000, 23d);
 		MenuItem mItem3 = new MenuItem("A2B", "idli", 1000, 23d);
 		MenuItem mItem4 = new MenuItem("A2B1", "pongal", 5, 10d);
-
-		foodOrderSystem.createRestaurent();
+		Set<MenuItem> menu = new HashSet<MenuItem>();
+		menu.add(mItem1);
+		menu.add(mItem2);
+		menu.add(mItem3);
+		menu.add(mItem4);
+		foodOrderSystem.createRestaurent("A2B", menu);
 		foodOrderSystem.createUser();
 		foodOrderSystem.runFoodOrderingSystem();
 	}

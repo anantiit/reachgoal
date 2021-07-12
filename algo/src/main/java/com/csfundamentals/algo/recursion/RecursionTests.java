@@ -1,6 +1,6 @@
 package com.csfundamentals.algo.recursion;
 
-import com.problemsolving.dynamicprogramming.DynamicProgrammingExamples;
+import com.algo.dynamicprogramming.DynamicProgrammingExamples;
 
 public class RecursionTests {
 	/*

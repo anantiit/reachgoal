@@ -108,9 +108,9 @@ public class ProjectSelection {
 	public int selectProjectsToMaximizeProfit(int pc[], int pp[], int maxNumProjects, int ic) {
 		ProjectCapitalComparator projectCapitalComparator = new ProjectCapitalComparator();
 		ProjectProfitComparator projectProfitComparator = new ProjectProfitComparator();
-		Queue<Project> minProjectCapitalQueue = new PriorityQueue<Project>(pc.length, projectCapitalComparator);
+		PriorityQueue<Project> minProjectCapitalQueue = new PriorityQueue<Project>(pc.length, projectCapitalComparator);
 
-		Queue<Project> maxProjectProfitQueue = new PriorityQueue<Project>(pp.length, projectProfitComparator);
+		PriorityQueue<Project> maxProjectProfitQueue = new PriorityQueue<Project>(pp.length, projectProfitComparator);
 		loadAllProjectsToHeap(pc, pp, minProjectCapitalQueue, maxProjectProfitQueue);
 		int selectedProjectCount = 0;
 		int currentCapital = ic;

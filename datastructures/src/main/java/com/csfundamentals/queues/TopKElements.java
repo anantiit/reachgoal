@@ -8,8 +8,6 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
-// } Driver Code Ends
-
 class Solution {
 	static ArrayList<Integer> kTop(int[] a, int n, int k) {
 		// code here.

@@ -13,6 +13,10 @@ public class BuyOptionCount {
 	public static long buyOptionCount(long budgetamount, List<Integer> jeans, List<Integer> shoes, List<Integer> skirt,
 			List<Integer> top, int counter) {
 
+		if (budgetamount < 0) {
+			return buyOptionCount;
+		}
+
 		if (counter == 4) {
 			if (budgetamount >= 0) {
 				return buyOptionCount++;
@@ -27,17 +31,17 @@ public class BuyOptionCount {
 			}
 		}
 		if (counter == 1) {
-			for (int j = 0; j < jeans.size(); j++) {
+			for (int j = 0; j < shoes.size(); j++) {
 				buyOptionCount(budgetamount - shoes.get(j), jeans, shoes, skirt, top, counter + 1);
 			}
 		}
 		if (counter == 2) {
-			for (int k = 0; k < jeans.size(); k++) {
+			for (int k = 0; k < skirt.size(); k++) {
 				buyOptionCount(budgetamount - skirt.get(k), jeans, shoes, skirt, top, counter + 1);
 			}
 		}
 		if (counter == 3) {
-			for (int l = 0; l < jeans.size(); l++) {
+			for (int l = 0; l < top.size(); l++) {
 
 				buyOptionCount(budgetamount - top.get(l), jeans, shoes, skirt, top, counter + 1);
 			}
@@ -47,10 +51,10 @@ public class BuyOptionCount {
 	}
 
 	public static void main(String args[]) {
-		long budgetamount = 10;
+		long budgetamount = 11;
 		List<Integer> jeans = Arrays.asList(2, 3);
-		List<Integer> shoes = Arrays.asList(2, 3);
-		List<Integer> skirt = Arrays.asList(2, 3);
+		List<Integer> shoes = Arrays.asList(4, 3);
+		List<Integer> skirt = Arrays.asList(3, 4);
 		List<Integer> top = Arrays.asList(2, 3);
 		int counter = 0;
 		System.out.println(buyOptionCount(budgetamount, jeans, shoes, skirt, top, counter));

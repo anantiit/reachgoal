@@ -55,14 +55,82 @@ public class TreeProblems {
 		}
 	}
 
+	/*
+	 * Given a binary tree, where every node value is a Digit from 1-9 .Find the sum
+	 * of all the numbers which are formed from root to leaf paths.
+	 * https://www.geeksforgeeks.org/sum-numbers-formed-root-leaf-paths/ There are 4
+	 * leaves, hence 4 root to leaf paths: Path Number 6->3->2 632 6->3->5->7 6357
+	 * 6->3->5->4 6354 6->5>4 654 Answer = 632 + 6357 + 6354 + 654 = 13997
+	 */
+	public static int rootToLeafPathSum(Node root, String num) {
+		if (root == null) {
+			return 0;
+		}
+		if (root.left == null && root.right == null) {
+			return Integer.parseInt(num + root.data);
+		}
+		int sum = 0;
+		if (root.left != null) {
+			sum = rootToLeafPathSum(root.left, num + root.data);
+		}
+		if (root.right != null) {
+			sum = sum + rootToLeafPathSum(root.right, num + root.data);
+		}
+		return sum;
+	}
+
+	static int getCount(Node root, int l, int h) {
+		// Your code here
+		if (root == null) {
+			return 0;
+		}
+		int count = 0;
+		if (l <= root.data && root.data <= h) {
+			count++;
+		}
+		if (root.data < h) {
+			count = count + getCount(root.right, l, h);
+		}
+		if (root.data > l) {
+			count = count + getCount(root.left, l, h);
+		}
+		return count;
+	}
+
+	public static boolean isBST(Node root) {
+		Node prev = root;
+		return isBST(root, prev);
+	}
+
+	public static boolean isBST(Node root, Node prev) {
+		if (root == null) {
+			return true;
+		}
+		if (root.left != null && !isBST(root.left, prev)) {
+			return false;
+		}
+		if (prev != null && prev.data > root.data) {
+			return false;
+		}
+		prev.data = root.data;
+		if (root.right != null && !isBST(root.right, prev)) {
+			return false;
+		}
+		return true;
+	}
+
 	public static void main(String args[]) {
-		Node left3 = new Node(6, null, null);
-		Node right3 = new Node(7, null, null);
-		Node left2 = new Node(4, null, null);
-		Node right2 = new Node(5, null, null);
-		Node left1 = new Node(2, left2, right2);
-		Node right1 = new Node(3, left3, right3);
-		Node root = new Node(1, left1, right1);
+		Node root = new Node(5);
+		root.left = new Node(3);
+		root.right = new Node(6);
+		root.right.right = new Node(7);
+		root.left.left = new Node(2);
+		root.left.right = new Node(4);
+		// root.left.right.right = new Node();
+		root.left.right.left = new Node(1);
+		System.out.println(isBST(root));
+		System.out.println(getCount(root, 2, 8));
+		System.out.println(rootToLeafPathSum(root, ""));
 		preOrderTraversal(root);
 		System.out.println();
 		inOrderTraversal(root);

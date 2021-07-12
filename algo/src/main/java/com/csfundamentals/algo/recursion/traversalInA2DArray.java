@@ -1,7 +1,8 @@
 package com.csfundamentals.algo.recursion;
 
 /*
- * NxM mesh. 0 and x are the type nodes. move from top left to bottom right. calculate total of paths I cean reach top  left to bottom right
+ * NxM mesh. 0 and x are the type nodes. move from top left to bottom right. 
+ * calculate total of paths I cean reach top  left to bottom right
 
 0 00  0
 x x 0 0

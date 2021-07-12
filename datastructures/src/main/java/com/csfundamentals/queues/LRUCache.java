@@ -1,7 +1,5 @@
 package com.csfundamentals.queues;
 
-/* package whatever; // don't place package name! */
-
 import java.util.HashMap;
 
 class Entry {
@@ -46,7 +44,7 @@ public class LRUCache {
 			newnode.right = null;
 			newnode.value = value;
 			newnode.key = key;
-			if (hashmap.size() > LRU_SIZE) // We have reached maxium size so need to make room for new element.
+			if (hashmap.size() > LRU_SIZE) // We have reached maximum size so need to make room for new element.
 			{
 				hashmap.remove(end.key);
 				removeNode(end);

@@ -50,6 +50,7 @@ public class DateUtils {
 
 	public static int getDayStartTs(final long ts, final String tz) {
 		final Calendar cal = Calendar.getInstance(TimeZone.getTimeZone(tz));
+		// cal.setTime(date);
 		cal.setTimeInMillis(ts * TO_LONG);
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
