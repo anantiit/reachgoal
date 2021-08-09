@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d7a8873-1285-4c7d-943b-33e46f3ad61a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/pythoncourse.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/numbers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/strings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pythoncourse/userinput.py" afterDir="false" />
-    </list>
+    <list default="true" id="5d7a8873-1285-4c7d-943b-33e46f3ad61a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

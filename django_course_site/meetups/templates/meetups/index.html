@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Meetups</h1>
+<p>All my meetups.</p>
+<link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}" >
+{% if show_meets %}
+	{% for meetup_item in  meetupslist %}
+		<p>{{ meetup_item.title }}</p>
+		<p>{{ meetup_item.slug }}</p>
+		<p>{{ meetup_item.description }}</p>
+		<img src = {{meetup_item.image}} alt={{meetup_item.title}}>
+	{% endfor %}
+{% endif %}
+</body>
+</html>
