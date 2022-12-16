@@ -97,7 +97,6 @@ public class DynamicProgrammingExamples {
 		return sum;
 	}
 
-	public static int 
 
 	public static int count(int S[], int m, int n) {
 		// table[i] will be storing the number of solutions for
