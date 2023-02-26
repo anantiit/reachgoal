@@ -21,14 +21,14 @@ public class ArrayUtils {
 //		System.out.println(Arrays.toString(maximumOfAllKSizeSubArrays(arr1, k)));
 //		// { 5, 3, 2, 4, 1 };
 //		nextGreaterElement(arr);
-		 //int[] arr = {0,1,2,3,4,5,6,7};
-		 int arr[] = {1, 2, 3, 4, 5, 6, 7};
-				 //Output: 3 4 5 6 7 1 2
-		 System.out.println(Arrays.toString(arr));
-		 int rotateLength = 3;
-		 //rotate(arr, rotateLength);
-		 au.leftRotate(arr, rotateLength, arr.length);
-		//System.out.println(Arrays.toString(arr));
+		// int[] arr = {0,1,2,3,4,5,6,7};
+		int arr[] = { 1, 2, 3, 4, 5, 6, 7 };
+		// Output: 3 4 5 6 7 1 2
+		System.out.println(Arrays.toString(arr));
+		int rotateLength = 3;
+		// rotate(arr, rotateLength);
+		au.leftRotate(arr, rotateLength, arr.length);
+		// System.out.println(Arrays.toString(arr));
 		// System.out.println(longestCommonSubsequence("ABCBDAB", "BDCABA"));
 //		ArrayList<ArrayList<Integer>> mat = new ArrayList<ArrayList<Integer>>();
 //		ArrayList<Integer> row1 = new ArrayList<Integer>();
@@ -44,51 +44,47 @@ public class ArrayUtils {
 //		System.out.println(mat);
 	}
 
-	 void leftRotate(int arr[], int d, int n)
-    {
-        /* To handle if d >= n */
-        d = d % n;
-        int i, j, k, temp;
-        int g_c_d = gcd(d, n);
-        for (i = 0; i < g_c_d; i++) {
-            /* move i-th values of blocks */
+	void leftRotate(int arr[], int d, int n) {
+		/* To handle if d >= n */
+		d = d % n;
+		int i, j, k, temp;
+		int g_c_d = gcd(d, n);
+		for (i = 0; i < g_c_d; i++) {
+			/* move i-th values of blocks */
 
-            temp = arr[i];
-            j = i;
-            while (true) {
-                k = j + d;
-                if (k >= n)
-                    k = k - n;
-                if (k == i)
-                    break;
-                arr[j] = arr[k];
-                System.out.println("in while "+Arrays.toString(arr)+j+","+k);
-                j = k;
-            }
-            arr[j] = temp;
-            System.out.println("in for:"+Arrays.toString(arr));
-        }
-    }
- 
-    /*UTILITY FUNCTIONS*/
- 
-    /* function to print an array */
-    void printArray(int arr[], int size)
-    {
-        int i;
-        for (i = 0; i < size; i++)
-            System.out.print(arr[i] + " ");
-    }
- 
-    /*Function to get gcd of a and b*/
-    int gcd(int a, int b)
-    {
-        if (b == 0)
-            return a;
-        else
-            return gcd(b, a % b);
-    }
- 
+			temp = arr[i];
+			j = i;
+			while (true) {
+				k = j + d;
+				if (k >= n)
+					k = k - n;
+				if (k == i)
+					break;
+				arr[j] = arr[k];
+				System.out.println("in while " + Arrays.toString(arr) + j + "," + k);
+				j = k;
+			}
+			arr[j] = temp;
+			System.out.println("in for:" + Arrays.toString(arr));
+		}
+	}
+
+	/* UTILITY FUNCTIONS */
+
+	/* function to print an array */
+	void printArray(int arr[], int size) {
+		int i;
+		for (i = 0; i < size; i++)
+			System.out.print(arr[i] + " ");
+	}
+
+	/* Function to get gcd of a and b */
+	int gcd(int a, int b) {
+		if (b == 0)
+			return a;
+		else
+			return gcd(b, a % b);
+	}
 
 //Worst case it is O(n*m) and no extra space being used.
 	public static void mergeSortedArrays(int[] arr1, int[] arr2) {
@@ -241,5 +237,13 @@ public class ArrayUtils {
 			}
 		}
 		return -1;
+	}
+
+	public static void rearrangeArray(int[] arr) {
+		// Assuming that array contains the numbers which are 0 to n-1 and each only
+		// once
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = arr[i + 1];
+		}
 	}
 }

@@ -14,7 +14,10 @@ public class ArrayProblemSolving {
 
 	public static void main(String[] args) {
 		int[] arr = { 0, 0, 0, 0, 1, 1, 2, 3, 3, 3, 3, 4 };
-		replaceDuplicatesInArray(arr);
+		int a[] = { 10, 20, 35, 36, 50, 75, 80 };
+		int x = 71;
+		findSumXInSortedArr(a, x);
+		// replaceDuplicatesInArray(arr);
 	}
 
 	public static int replaceDuplicatesInArray(int[] arr) {
@@ -39,5 +42,26 @@ public class ArrayProblemSolving {
 		}
 		System.out.println(Arrays.toString(arr));
 		return indexAfterRemovingDuplicates + 1;
+	}
+
+	/*
+	 * https://www.geeksforgeeks.org/two-pointers-technique/ Given a sorted array A
+	 * (sorted in ascending order), having N integers, find if there exists any pair
+	 * of elements (A[i], A[j]) such that their sum is equal to X.
+	 */
+	public static void findSumXInSortedArr(int[] a, int x) {
+		int n = a.length;
+		int i = 0, j = n - 1;
+		while (i < n && j >= 0) {
+			System.out.println("indexes are i" + i + ", j" + j + "a[i] + a[j]" + (a[i] + a[j]));
+			if (a[i] + a[j] == x) {
+				System.out.println("indexes are i" + i + ", j" + j + "a[i] + a[j]" + (a[i] + a[j]));
+				return;
+			} else if (a[i] + a[j] < x) {
+				i++;
+			} else {
+				j--;
+			}
+		}
 	}
 }
