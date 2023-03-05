@@ -1,8 +1,0 @@
-com/bidgely/s3a/S3MapReduce.class
-com/bidgely/spark/poc/s3a/S3AConnector.class
-com/bidgely/s3a/S3AConnector.class
-com/bidgely/s3a/S3MapReduce$S3Reducer.class
-com/bidgely/spark/poc/gb/GBOutput.class
-com/bidgely/spark/poc/s3a/S3ADao.class
-com/bidgely/s3a/S3AWriter.class
-com/bidgely/s3a/S3MapReduce$S3Mapper.class
