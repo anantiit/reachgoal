@@ -13,10 +13,11 @@ public class LRUCache {
 
 	HashMap<Integer, Entry> hashmap;
 	Entry start, end;
-	int LRU_SIZE = 4; // Here i am setting 4 to test the LRU cache
-						// implementation, it can make be dynamic
+	int DEFAULT_LRU_SIZE = 4; // Here i am setting 4 to test the LRU cache
+	int capacity = DEFAULT_LRU_SIZE; // implementation, it can be made dynamic
 
-	public LRUCache() {
+	public LRUCache(int capacity) {
+		this.capacity = capacity;
 		hashmap = new HashMap<Integer, Entry>();
 	}
 
@@ -44,7 +45,7 @@ public class LRUCache {
 			newnode.right = null;
 			newnode.value = value;
 			newnode.key = key;
-			if (hashmap.size() > LRU_SIZE) // We have reached maximum size so need to make room for new element.
+			if (hashmap.size() > capacity) // We have reached maximum size so need to make room for new element.
 			{
 				hashmap.remove(end.key);
 				removeNode(end);
@@ -83,20 +84,39 @@ public class LRUCache {
 		}
 	}
 
+	@Override
+	public String toString() {
+		Entry cur = start;
+		while (cur != end) {
+			System.out.print("[" + cur.key + ":" + cur.value + "]");
+			cur = cur.right;
+		}
+		return null;
+
+	}
+
+	public String fractionToDecimal(int numerator, int denominator) {
+
+		String result = (float) numerator / denominator + "";
+		if (result.endsWith(".0")) {
+			return result.substring(0, result.length() - 2);
+		}
+		return result;
+	}
+
 	public static void main(String[] args) throws java.lang.Exception {
 		// your code goes here
-		LRUCache lrucache = new LRUCache();
+		LRUCache lrucache = new LRUCache(4);
 		lrucache.putEntry(1, 1);
 		lrucache.putEntry(10, 15);
 		lrucache.putEntry(15, 10);
+		System.out.println(lrucache);
 		lrucache.putEntry(10, 16);
 		lrucache.putEntry(12, 15);
 		lrucache.putEntry(18, 10);
+		System.out.println(lrucache);
 		lrucache.putEntry(13, 16);
-
-		System.out.println(lrucache.getEntry(1));
-		System.out.println(lrucache.getEntry(10));
-		System.out.println(lrucache.getEntry(15));
+		System.out.println(lrucache);
 
 	}
 }

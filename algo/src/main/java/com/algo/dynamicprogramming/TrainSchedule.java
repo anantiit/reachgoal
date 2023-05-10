@@ -6,8 +6,14 @@ import java.util.TreeSet;
 
 public class TrainSchedule {
 	public static void main(String args[]) {
-		int arr[] = { 910, 930, 940, 1050 };
-		int dep[] = { 935, 950, 1040, 1110 };
+		int arr[] = { 900, 940, 1121, 1500, 1800 };
+		int dep[] = { 940, 1200, 1130, 1900, 2000 };
+		/*
+		 * TimeTime t0 = new TimeTime(900, 940); TimeTime t1 = new TimeTime(940, 1200);
+		 * TimeTime t2 = new TimeTime(950, 1120); TimeTime t3 = new TimeTime(1121,
+		 * 1130); TimeTime t4 = new TimeTime(1500, 1900); TimeTime t5 = new
+		 * TimeTime(1800, 2000);
+		 */
 		double profit[] = { 12, 14, 13, 18 };
 		int npf = 3;
 		int n = arr.length;

@@ -1,5 +1,11 @@
 package com.csfundamentals.graphs;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 import com.csfundamentals.disjointsets.DisjointSet;
 
 public class GraphCycleDetection {
@@ -28,6 +34,54 @@ public class GraphCycleDetection {
 			System.out.println("Graph contains cycle");
 		else
 			System.out.println("Graph doesn't contain cycle");
+
+		ArrayList<ArrayList<Integer>> adj = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> adj0 = new ArrayList<Integer>();
+		ArrayList<Integer> adj1 = new ArrayList<Integer>(List.of(2));
+		ArrayList<Integer> adj2 = new ArrayList<Integer>(List.of(1, 3));
+		ArrayList<Integer> adj3 = new ArrayList<Integer>(List.of(2));
+		adj.add(adj0);
+		adj.add(adj1);
+		adj.add(adj2);
+		adj.add(adj3);
+		if (isCycle(4, adj))
+			System.out.println("Graph contains cycle");
+		else
+			System.out.println("Graph doesn't contain cycle");
+
+	}
+
+	public static boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+		// Code here
+		boolean visited[] = new boolean[V];
+		int parent[] = new int[V];
+		Arrays.fill(parent, -1);
+		Queue<Integer> q = new LinkedList<Integer>();
+		for (int i = 0; i < adj.size(); i++) {
+			if (!visited[i]) {
+				q.add(i);
+			}
+			while (!q.isEmpty()) {
+				int v = q.poll();
+				if (v >= adj.size()) {
+					continue;
+				}
+				for (int next : adj.get(v)) {
+					// visited from some other node which is not its parent
+					if (visited[next] && parent[v] != next) {
+						System.out.println("visited[next]:" + visited[next] + " parent[next]:" + parent[next] + " next:"
+								+ next + " v:" + v);
+						return true;
+					}
+					parent[next] = v;
+					visited[v] = true;
+					if (!visited[next]) {
+						q.add(next);
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public static int isCycle(Graph graph) {

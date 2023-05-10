@@ -24,21 +24,19 @@ public class DistributionWays {
 		if (m == 1 && n > c) {
 			return 0;
 		}
+		// i<=m will recount the possible ways. We dont need to count this as the
+		// remaining chocolates need to be given to m th person
 		int totalWays = 0;
-		for (int i = 1; i <= m; i++) {
-			for (int j = 0; j <= c; j++) {
-				int ways = numOfWaysToDistribute(n - j, m - 1, c);
-				if (ways > 0) {
-					totalWays = totalWays + ways;
-					System.out.println(
-							"n:" + (n - j) + "m:" + (m - 1) + "c:" + c + "ways:" + ways + "totalWays:" + totalWays);
-				}
-			}
+		for (int j = 0; j <= c; j++) {
+			System.out.print("m:" + m + "j:" + j);
+			totalWays += numOfWaysToDistribute(n - j, m - 1, c);
+			System.out.println();
+			System.out.println("n:" + n + "m:" + m + "c:" + c + "j:" + j + "totalWays :" + totalWays);
 		}
 		return totalWays;
 	}
 
 	public static void main(String args[]) {
-		System.out.println(numOfWaysToDistribute(2, 2, 2));
+		System.out.println(numOfWaysToDistribute(4, 3, 2));
 	}
 }

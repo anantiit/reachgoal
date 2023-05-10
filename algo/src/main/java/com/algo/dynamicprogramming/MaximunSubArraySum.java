@@ -4,12 +4,12 @@ public class MaximunSubArraySum {
 	public static int maximunSubArraySum(int[] a) {
 		int n = a.length;
 		int sum = 0;
-		int maxSum = 0;
+		int globalMaxSum = 0;
 		for (int i = 0; i < n; i++) {
 			sum = Math.max(sum + a[i], a[i]);
-			maxSum = Math.max(maxSum, sum);
+			globalMaxSum = Math.max(globalMaxSum, sum);
 		}
-		return maxSum;
+		return globalMaxSum;
 	}
 
 	public static int maximunSubArrayProduct(int[] a) {

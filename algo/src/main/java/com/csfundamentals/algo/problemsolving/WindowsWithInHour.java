@@ -64,13 +64,14 @@ public class WindowsWithInHour {
 			badgeTimeSet.add(Integer.parseInt(badgeTimes[i][1]));
 			badges.put(badgeTimes[i][0], badgeTimeSet);
 		}
+
 		for (String name : badges.keySet()) {
 			Set<Integer> badgeTimeSet = badges.get(name);
 			LinkedList<Integer> badgesInHour = new LinkedList<Integer>();
 			int timeDiff = 0;
 			int prevTime = -1;
 			for (Integer time : badgeTimeSet) {
-				if (prevTime > 0) {
+				if (prevTime >= 0) {
 					timeDiff = timeDiff + (time - prevTime);
 				}
 				if (timeDiff > 100) {
@@ -78,6 +79,10 @@ public class WindowsWithInHour {
 				}
 				badgesInHour.add(time);
 				prevTime = time;
+				if (badgesInHour.size() >= 3) {
+					result.put(name, badgesInHour);
+					break;
+				}
 			}
 			if (badgesInHour.size() >= 3) {
 				result.put(name, badgesInHour);

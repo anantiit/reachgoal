@@ -1,6 +1,8 @@
 package com.csfundamentals.arrays;
 
 // Java program to find number of subarrays
+//https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/
+
 // with sum exactly equal to k.
 import java.util.HashMap;
 

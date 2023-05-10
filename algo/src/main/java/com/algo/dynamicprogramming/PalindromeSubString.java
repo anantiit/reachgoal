@@ -1,5 +1,7 @@
 package com.algo.dynamicprogramming;
 
+import java.util.Arrays;
+
 public class PalindromeSubString {
 	public static int longestPalindromeSubString(String a) {
 		int n = a.length();
@@ -40,7 +42,13 @@ public class PalindromeSubString {
 							+ "substring : " + a.substring(maxStart, maxEnd + 1));
 
 				}
+				else {
+					Math.max(L[i + 1][j], L[i][j - 1]);
+				}
 			}
+		}
+		for (int i = 0; i < n; i++) {
+			System.out.println(Arrays.toString(L[i]));
 		}
 		System.out.println("Palindrome : max size: " + max + "substring : " + a.substring(maxStart, maxEnd + 1));
 		return max;

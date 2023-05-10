@@ -1,6 +1,8 @@
 package com.csfundamentals.disjointsets;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 
@@ -26,11 +28,11 @@ public class DisjointSet {
 			return -1;
 		}
 		if (parent[x] < 0) {
-			System.out.println("element " + x + "found root: " + x);
+			// System.out.println("element " + x + "found root: " + x);
 			return x;
 		}
 		if (parent[parent[x]] < 0) {
-			System.out.println("element " + x + "found root: " + parent[x]);
+			// System.out.println("element " + x + "found root: " + parent[x]);
 			return parent[x];
 		}
 		// making all the nodes directly connected to the root.
@@ -46,11 +48,11 @@ public class DisjointSet {
 			return -1;
 		}
 		if (parent[x] < 0) {
-			System.out.println("element " + x + "found root: " + x);
+			// System.out.println("element " + x + "found root: " + x);
 			return x;
 		}
 		if (parent[parent[x]] < 0) {
-			System.out.println("element " + x + "found root: " + parent[x]);
+			// System.out.println("element " + x + "found root: " + parent[x]);
 			return parent[x];
 		}
 		System.out.println("Disjoint Set parent array: " + Arrays.toString(parent));
@@ -86,12 +88,25 @@ public class DisjointSet {
 	}
 
 	/**
-	 * find set x, y and then make one root as parent of other based on size.in
+	 * find set x, y and then make one root as parent of other based on height.in
 	 * parent array for each node we store the parent of it and at root we store the
 	 * height of the disjoint set
 	 */
-	public static int unionByHeight(int x, int y) {
-		return 0;
+	public static int unionByHeight(int[] parent, int x, int y) {
+		int root1 = findByPathCompression(parent, x);
+		int root2 = findByPathCompression(parent, y);
+		if (root1 == root2 && root1 != -1) {
+			// System.out.println("Not able to find the elements: " + x + " " + y);
+			return root1;
+		}
+		// Heigher height set will be the root of the union
+		if (parent[root1] < parent[root2]) {
+			return parent[root1] = root2;
+		} else {
+			if (parent[root1] == parent[root2])
+				parent[root1]--;
+			return parent[root2] = root1;
+		}
 	}
 
 	/**
@@ -104,6 +119,58 @@ public class DisjointSet {
 		}
 		System.out.println("Disjoint Set parent array: " + Arrays.toString(parent));
 		return parent;
-		HashS
 	}
+
+	public static void main(String[] args) {
+		int V = 6;
+		List<Edge> graphEdges = new ArrayList<Edge>(
+				List.of(new Edge(0, 1, 10), new Edge(0, 2, 6), new Edge(0, 3, 5), new Edge(1, 3, 15), new Edge(2, 3, 4)
+				// , new Edge(4, 5, 4)
+				));
+		findMinimumSpanningTree(graphEdges, V);
+
+	}
+
+	private static List<Edge> findMinimumSpanningTree(List<Edge> graphEdges, int V) {
+		int totalEdgesInST = 1;
+		List<Edge> spanningTree = new ArrayList<Edge>();
+		graphEdges.sort((a, b) -> a.weight - b.weight);
+		int[] parentArr = makeSet(V);
+		Edge edge0 = graphEdges.get(0);
+		System.out.println(graphEdges);
+		for (int i = 0; i < graphEdges.size() && totalEdgesInST < V; i++) {
+			Edge edge = graphEdges.get(i);
+			int srcRoot = findByPathCompression(parentArr, edge.src);
+			int destRoot = findByPathCompression(parentArr, edge.dest);
+			if (srcRoot != destRoot) {
+				unionByHeight(parentArr, edge.src, edge.dest);
+				srcRoot = findByPathCompression(parentArr, edge.src);
+				int edge0Root = findByPathCompression(parentArr, edge0.src);
+				if (srcRoot != edge0Root) {
+					System.out.println("Given graph is disconnected so there is not spanning tree");
+					break;
+				}
+				spanningTree.add(edge);
+				totalEdgesInST++;
+			}
+		}
+		System.out.println(spanningTree);
+		return spanningTree;
+	}
+}
+
+class Edge {
+	int src, dest, weight;
+
+	public Edge(int src, int dest, int weight) {
+		this.src = src;
+		this.dest = dest;
+		this.weight = weight;
+	}
+
+	@Override
+	public String toString() {
+		return "Edge [src=" + src + ", dest=" + dest + ", weight=" + weight + "]";
+	}
+
 }

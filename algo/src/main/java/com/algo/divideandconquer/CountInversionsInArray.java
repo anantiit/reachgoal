@@ -49,8 +49,10 @@ public class CountInversionsInArray {
 	}
 
 	public static void main(String args[]) {
-		int[] arr = { 1, 20, 6, 4, 5 };
+		int[] arr = { 2, 4, 1, 3, 5 };
 
 		System.out.println(countInversions(arr, 0, arr.length - 1));
+		System.out.println(Arrays.toString(arr));
 	}
+
 }

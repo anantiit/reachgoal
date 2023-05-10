@@ -64,6 +64,17 @@ public class MultiplyLinkedList {
 		}
 	}
 
+	Node reverseList(Node head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		Node newHead = reverseList(head.next);
+		Node reverseTail = head.next;
+		reverseTail.next = head;
+		head.next = null;
+		return head = newHead;
+	}
+
 	public static List<Integer> converToList(String s1) {
 		List<Integer> list = new ArrayList<Integer>();
 		char[] charArr = s1.toCharArray();
@@ -77,4 +88,13 @@ public class MultiplyLinkedList {
 		multiplyLinkedList("12453456456898", "1");
 	}
 
+}
+
+class Node {
+	int data;
+	Node next;
+
+	Node(int data) {
+		this.data = data;
+	}
 }

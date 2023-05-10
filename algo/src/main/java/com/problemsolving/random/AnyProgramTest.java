@@ -7,7 +7,15 @@ import java.util.Set;
 
 public class AnyProgramTest {
 	public static void main(String[] args) {
-		priorityQueueTest();
+
+		int variable = 15;
+		System.out.println("Original value of the variable = " + variable);
+
+		// after using increment operator
+		System.out.println("++variable = " + (++variable));
+		System.out.println("variable++ = " + (variable++));
+
+		// priorityQueueTest();
 //		System.out.println(numJewelsInStones("aA", "aAafsafsdf"));
 //		System.out.println('A' + 0 + "," + ('a' + 0));
 //		System.out.println(numJewelsInStones1("aA", "aAafsafsdf"));

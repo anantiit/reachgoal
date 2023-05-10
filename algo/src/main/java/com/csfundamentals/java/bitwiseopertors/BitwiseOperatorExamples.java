@@ -5,11 +5,11 @@ public class BitwiseOperatorExamples {
 		int arr1[] = { 1, 3, 5 };
 		int n1 = arr1.length;
 
-		System.out.println(sumBitDifferences(arr1, n1));
+		// System.out.println(sumBitDifferences(arr1, n1));
 		// Initial values
 		int a = 5;
 		int b = 7;
-		System.out.println((7 >> 1) >> 1);
+		System.out.println((9 << 1) + "");
 		// bitwise and
 		// 0101 & 0111=0101 = 5
 		System.out.println("a&b = " + (a & b));
@@ -36,7 +36,9 @@ public class BitwiseOperatorExamples {
 		int arr[] = { 12, 1, 12, 3, 12, 1, 1, 2, 3, 2, 2, 3, 8 };
 		int n = arr.length;
 		System.out.println("The element with single occurrence is " + getSingle(arr, n));
-
+		int[] a1 = { 2, 3, 5, 4, 5, 3, 4, 2, 8 };
+		System.out.println(
+				"The element with single occurrence is " + findElementAppearsOnceInArrayWithOtherElemTwice(a1));
 	}
 
 	// Java code to find the element
@@ -56,17 +58,26 @@ public class BitwiseOperatorExamples {
 			sum = 0;
 			x = (1 << i);
 			for (int j = 0; j < n; j++) {
-				if ((arr[j] & x) == 0)
+				if ((arr[j] & x) == x)
 					sum++;
 			}
 			// The bits with sum not multiple of 3, are the
 			// bits of element with single occurrence.
 			if ((sum % 3) != 0)
 				result |= x;
-			System.out.println(Integer.toBinaryString(result));
+			// System.out.println(Integer.toBinaryString(result));
 		}
-		System.out.println(Integer.toBinaryString(~result));
-		return ~result;
+		// System.out.println(Integer.toBinaryString(~result));
+		return result;
+	}
+
+	public static int findElementAppearsOnceInArrayWithOtherElemTwice(int[] a) {
+		int n = a.length;
+		int result = 0;
+		for (int i = 0; i < n; i++) {
+			result = result ^ a[i];
+		}
+		return result;
 	}
 
 	static int sumBitDifferences(int arr[], int n) {
@@ -81,7 +92,7 @@ public class BitwiseOperatorExamples {
 			int count = 0;
 
 			for (int j = 0; j < n; j++) {
-				System.out.println(1 << i);
+				// System.out.println(1 << i);
 				if ((arr[j] & (1 << i)) == 0)
 					count++;
 			}

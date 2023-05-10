@@ -1,7 +1,6 @@
-
 /*
- * Discussion at the interview time
- * Maximize profit 
+ Discussion at the interview time
+ Maximize profit 
 Input: Project Capitals=[0,1,2], Project Profits=[1,2,3], Initial Capital=1, Number of Projects=2
 Output: 6
 Initial capital = 1

@@ -1,6 +1,7 @@
 package com.csfundamentals.trees;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,16 +48,13 @@ public class BSTFromList {
 	}
 
 	public static void main(String args[]) {
-		List<Integer> list1 = new ArrayList<Integer>();
+		List<Integer> list1 = new ArrayList<Integer>(Arrays.asList(15, 13, 17));
 		List<Integer> list2 = new ArrayList<Integer>();
 		List<Integer> list3 = new ArrayList<Integer>();
 		List<Integer> list4 = new ArrayList<Integer>();
 		List<Integer> list5 = new ArrayList<Integer>();
 		List<Integer> list6 = new ArrayList<Integer>();
 		List<Integer> list7 = new ArrayList<Integer>();
-		list1.add(15);
-		list1.add(13);
-		list1.add(17);
 		list2.add(17);
 		list2.add(-1);
 		list2.add(-1);

@@ -6,8 +6,8 @@ import java.util.Queue;
 
 public class KnightTravelOnBoard {
 	public static int minTraversalPath = Integer.MAX_VALUE;
-	static int xMove[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
-	static int yMove[] = { 1, 2, 2, 1, -1, -2, -2, -1 };
+	public static final int xMove[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
+	public static final int yMove[] = { 1, 2, 2, 1, -1, -2, -2, -1 };
 
 	public static boolean knightTravel(int[][] chessBoard, int srcRow, int srcCol, int destRow, int destCol,
 			int hopCount, int n, int xMove[], int yMove[]) {
@@ -60,8 +60,7 @@ public class KnightTravelOnBoard {
 				int nextX = xMove[i] + currNode.x;
 				int nextY = yMove[i] + currNode.y;
 				if (nextX == destRow && nextY == destCol) {
-					chessBoard[nextX][nextY] = chessBoard[currNode.x][currNode.y] + 1;
-					return chessBoard[nextX][nextY];
+					return chessBoard[nextX][nextY] = chessBoard[currNode.x][currNode.y] + 1;
 				}
 				if (nextX > n - 1 || nextY > n - 1 || nextX < 0 || nextY < 0 || chessBoard[nextX][nextY] != 0) {
 					continue;

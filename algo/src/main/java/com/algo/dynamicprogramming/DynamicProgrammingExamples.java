@@ -1,6 +1,5 @@
 package com.algo.dynamicprogramming;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DynamicProgrammingExamples {
@@ -21,6 +20,7 @@ public class DynamicProgrammingExamples {
 		return t[n];
 	}
 
+	// Bottomup memoization
 	public static int TOptimized(int n) {
 		if (n < 1)
 			return 2;
@@ -30,7 +30,7 @@ public class DynamicProgrammingExamples {
 		t[0] = 2;
 		t[1] = 2;
 		t[2] = 2 * t[0] * t[1];
-		for (int i = 3; i < n + 1; i++) {
+		for (int i = 2; i < n + 1; i++) {
 			t[i] = t[i - 1] + 2 * t[i - 1] * t[i - 2];
 		}
 		return t[n];
@@ -41,7 +41,7 @@ public class DynamicProgrammingExamples {
 		for (int i = 0; i < s1.length(); i++) {
 			for (int j = 0; j < s2.length(); j++) {
 				if (s1.charAt(i) == s2.charAt(j)) {
-					System.out.print(s1.charAt(i));
+					// System.out.print(s1.charAt(i));
 					lcs[i + 1][j + 1] = lcs[i][j] + 1;
 				} else {
 					lcs[i + 1][j + 1] = Math.max(lcs[i][j + 1], lcs[i + 1][j]);
@@ -70,34 +70,6 @@ public class DynamicProgrammingExamples {
 
 	}
 
-	public static int coinchange2(int[] A, int B) {
-		ArrayList<Integer> T = new ArrayList<Integer>(B + 1);
-		for (int i = 0; i < B + 1; i++) {
-			T.add(-1);
-		}
-		return coinChange(A, B, T);
-	}
-
-	public static int coinChange(int[] A, int n, ArrayList<Integer> T) {
-		if (n < 0) {
-			return 0;
-		}
-		if (n == 0) {
-			return 1;
-		}
-		if (T.get(n) != -1) {
-			return T.get(n);
-		}
-		int sum = 0;
-		for (int i = 0; i < A.length; i++) {
-			sum = sum + coinChange(A, n - A[i], T);
-		}
-		T.set(n, sum);
-		System.out.println(T);
-		return sum;
-	}
-
-
 	public static int count(int S[], int m, int n) {
 		// table[i] will be storing the number of solutions for
 		// value i. We need n+1 rows as the table is constructed
@@ -124,29 +96,52 @@ public class DynamicProgrammingExamples {
 		int n = a.length;
 		int LIS[] = new int[n];
 		LIS[0] = 1;
-		// LIS[i] is the longest increasing subsequence from 0 to i LIS[i] = LIS[j]+1
+		// LIS[i] is the longest increasing subsequence from 0 to i where increasing
+		// sequence ending at a[i] LIS[i] = LIS[j]+1
 		// where j=0toi-1
-		int lis = Integer.MIN_VALUE;
+		int globalLIS = 1;
 		for (int i = 1; i < n; i++) {
-			int max = Integer.MIN_VALUE;
-			for (int j = 0; j < i; j++) {
-				if (LIS[j] >= max && a[i] > a[j]) {
-					max = LIS[j] + 1;
+			LIS[i] = 1;
+			int j = 0;
+			for (j = 0; j < i; j++) {
+				if (LIS[j] >= LIS[i] && a[i] > a[j]) {
+					LIS[i] = LIS[j] + 1;
 					System.out.println("i:" + i + " j:" + j + " LIS[j]:" + LIS[j]);
 				}
 			}
-			LIS[i] = max;
-			if (lis < LIS[i]) {
-				System.out.println("i:" + i + " LIS[i]:" + LIS[i]);
-				lis = LIS[i];
+			if (globalLIS < LIS[i]) {
+				globalLIS = LIS[i];
 			}
+			System.out.println("i: " + i + " j: " + j + " LIS[i]: " + LIS[i] + " globalLIS: " + globalLIS);
+
 		}
-		return lis;
+		return globalLIS;
+	}
+
+	public static int fibonacci(int n, int[] fib) {
+		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		if (fib[n] > 0) {
+			return fib[n];
+		}
+		return fib[n] = fibonacci(n - 1, fib) + fibonacci(n - 2, fib);
 	}
 
 	public static void main(String args[]) {
 		int arr[] = { 10, 22, 9, 33, 21, 50, 41, 2 };
-		System.out.println(longestIncreasingSubsequence(arr));
+		int a[] = { 15, 14, 13, 11, 9, 8, 6, 1 };
+		System.out.println(longestIncreasingSubsequence(a));
+		int n = 12;
+//		int[] fib = new int[n + 1];
+//		System.out.println(fibonacci(n, fib));
+//		System.out.println(Arrays.toString(fib));
+		String x = "ABCBDAB";
+		String y = "BDCABC";
+		System.out.println(longestCommonSubsequence(x, y));
 	}
 
 }

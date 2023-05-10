@@ -24,6 +24,22 @@ class Solution {
 		// System.out.println();
 	}
 
+	public static void minKElements(int[] arr, int maxSize) {
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((a, b) -> b - a);
+		maxHeap.add(arr[0]);
+		for (int i = 1; i < arr.length; i++) {
+			if (maxHeap.size() >= maxSize) {
+				if (maxHeap.peek() > arr[i]) {
+					maxHeap.poll();
+					maxHeap.add(arr[i]);
+				}
+			} else {
+				maxHeap.add(arr[i]);
+			}
+		}
+		System.out.println(maxHeap);
+	}
+
 	public static void topKElementToList(PriorityQueue<Node> pq, ArrayList<Integer> list, int key, int maxpqSize) {
 		Iterator<Node> itr = pq.iterator();
 		boolean foundKey = false;
@@ -88,6 +104,9 @@ public class TopKElements {
 
 	// Driver code
 	public static void main(String[] args) throws IOException {
+		int[] a1 = { 6, 5, 14, 12, 15, 19, 10, 1 };
+		Solution.minKElements(a1, 5);
+
 		// Taking input using buffered reader
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

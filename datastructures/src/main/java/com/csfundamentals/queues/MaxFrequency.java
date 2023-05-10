@@ -4,10 +4,11 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 
 /*
- * Given a string of lowercase alphabets and a number k, the task is to print the minimum value of the string after removal of ‘k’ characters. 
- * The value of a string is defined as the sum of squares of the count of each distinct character.
- * For example consider the string “saideep”, here frequencies of characters are s-1, a-1, i-1, e-2, d-1, p-1 and 
- * value of the string is 1^2 + 1^2 + 1^2 + 1^2 + 1^2 + 2^2 = 9.
+ Given a string of lowercase alphabets and a number k, the task is to print the minimum value of the string 
+  after removal of ‘k’ characters. 
+  The value of a string is defined as the sum of squares of the count of each distinct character.
+  For example consider the string “saideep”, here frequencies of characters are s-1, a-1, i-1, e-2, d-1, p-1 and 
+  value of the string is 1^2 + 1^2 + 1^2 + 1^2 + 1^2 + 2^2 = 9.
 Expected Time Complexity: O(k*logn)
 Examples: 
  

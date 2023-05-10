@@ -6,6 +6,8 @@ import java.util.Collections;
 // Program to find the maximum profit
 // job sequence from a given array
 // of jobs with deadlines and profits
+
+//Extend this if the number of workers are more which means at any point of time there can more number if Jobs which is equal to number of workers
 public class JobScheduling {
 
 	// Function to schedule the jobs take 2
@@ -47,11 +49,13 @@ public class JobScheduling {
 	public static void main(String args[]) {
 		ArrayList<Job> arr = new ArrayList<Job>();
 
-		arr.add(new Job('a', 2, 2));
-		arr.add(new Job('b', 1, 19));
-		arr.add(new Job('c', 2, 27));
-		arr.add(new Job('d', 1, -3));
-		arr.add(new Job('e', 3, 15));
+		arr.add(new Job('a', 1, 2));
+		arr.add(new Job('b', 2, 19));
+//		arr.add(new Job('c', 2, 27));
+//		arr.add(new Job('d', 1, 5));
+//		arr.add(new Job('f', 1, 30));
+//		arr.add(new Job('e', 3, 15));
+//		arr.add(new Job('g', 4, 20));
 
 		// Function call
 		System.out.println("Following is maximum " + "profit sequence of jobs");

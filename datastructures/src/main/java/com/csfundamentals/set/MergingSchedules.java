@@ -9,7 +9,7 @@ import java.util.TreeSet;
 //Prblem statement: {{1,3},{1,4},{2,4},{5,7},{9,10},{6,8}}-->{{1,4}{5,8}}
 public class MergingSchedules {
 	public static List<Node> mergingSchedules(List<Node> nodes) {
-		Set<Node> set = new TreeSet<Node>();
+		Set<Node> set = new TreeSet<Node>((a, b) -> (a.start == b.start) ? a.end - b.end : a.start - b.start);
 		set.addAll(nodes);
 		Iterator<Node> itr = set.iterator();
 		Node prev = itr.next();
@@ -18,37 +18,25 @@ public class MergingSchedules {
 		while (itr.hasNext()) {
 			Node cur = itr.next();
 			if (prev.end >= cur.start) {
-				cur.start = prev.start;
-				if (prev.end > cur.end) {
-					cur.end = prev.end;
-				}
-				result.add(new Node(prev.start, cur.end));
+				if (cur.end > prev.end)
+					prev.end = cur.end;
 			} else {
 				result.add(cur);
 			}
-			prev = cur;
-		}
-		Iterator<Node> itr1 = result.iterator();
-		Node previous = itr1.next();
-		while (itr1.hasNext()) {
-			Node cur = itr1.next();
-			if (previous.start == cur.start) {
-				itr1.remove();
-			}
-			previous = cur;
+			prev = result.get(result.size() - 1);
 		}
 		return result;
 	}
 
 	public static void main(String args[]) {
-
-		Node node1 = new Node(1, 2);
+//{{1,3},{1,4},{2,4},{5,7},{9,10},{6,8}}
+		Node node1 = new Node(1, 3);
 		Node node2 = new Node(1, 4);
 		Node node3 = new Node(2, 4);
-		Node node4 = new Node(5, 7);
+		Node node4 = new Node(5, 8);
 		Node node5 = new Node(5, 11);
 		Node node6 = new Node(6, 8);
-		Node node7 = new Node(8, 10);
+		Node node7 = new Node(9, 10);
 		List<Node> nodes = new ArrayList<Node>();
 		nodes.add(node1);
 		nodes.add(node2);
@@ -61,7 +49,7 @@ public class MergingSchedules {
 	}
 }
 
-class Node implements Comparable<Node> {
+class Node {
 	int start;
 	int end;
 
@@ -80,11 +68,11 @@ class Node implements Comparable<Node> {
 		return "{" + start + "," + end + "}";
 	}
 
-	@Override
-	public int compareTo(Node n) {
-		if (this.start <= n.start) {
-			return -1;
-		}
-		return 1;
-	}
+//	@Override
+//	public int compareTo(Node n) {
+//		if (this.start <= n.start) {
+//			return -1;
+//		}
+//		return 1;
+//	}
 }

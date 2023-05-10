@@ -47,8 +47,9 @@ public class SmallestPositiveMissingElementInArray {
 	}
 
 	public static void main(String args[]) {
-		int A[] = { 5, 3, -6, 4, -1, 2 };
-		System.out.println(smallestPositiveMissingElementInArray(A));
+		int A[] = { 3, 1, -6, 4, -1, 2 };
+		// System.out.println(smallestPositiveMissingElementInArray(A));
+		missingPositiveUsingCycleSort(A);
 	}
 
 	// Simple way with O(n) extra space
@@ -65,4 +66,30 @@ public class SmallestPositiveMissingElementInArray {
 		}
 		return i;
 	}
+
+	public static void swap(int[] a, int i, int j) {
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static int missingPositiveUsingCycleSort(int[] arr) {
+		int n = arr.length;
+		int i = 0;
+		while (i < n) {
+			int correctPos = arr[i] - 1;
+			if (correctPos >= 0 && correctPos < n && arr[correctPos] != arr[i]) {
+				swap(arr, i, correctPos);
+			} else {
+				i++;
+			}
+		}
+		int j = 0;
+		while (arr[j] == j + 1) {
+			j++;
+		}
+		System.out.println("First positive missing num : " + (j + 1));
+		return j + 1;
+	}
+
 }
