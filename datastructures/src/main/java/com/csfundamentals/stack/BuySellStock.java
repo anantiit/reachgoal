@@ -56,7 +56,8 @@ public class BuySellStock {
 	public static void main(String args[]) {
 		int[] prices = { 1, 2, 3, 4, 5 };
 		int[] prices1 = { 7, 7, 1, 5, 3, 6, 4 };
-		System.out.println(buySellStock(prices1));
+		int[] price = { 7, 1, 5, 3, 6, 4 };
+		System.out.println(buySellStock(price));
 	}
 
 }

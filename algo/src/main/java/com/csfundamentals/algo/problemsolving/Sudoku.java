@@ -13,7 +13,7 @@ public class Sudoku {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (board[i][j] != '.') {
-					if (!seen.add(i + "(" + board[i][j] + ")") || !seen.add(i + "(" + board[i][j] + ")")
+					if (!seen.add(i + "(" + board[i][j] + ")") || !seen.add("(" + board[i][j] + ")" + j)
 							|| !seen.add(i / 3 + "(" + board[i][j] + ")" + j / 3)) {
 						return false;
 					}

@@ -19,6 +19,30 @@ public class MiscellaneousProblems {
 		}
 	}
 
+	public static double myPow(double x, int n) {
+		if (n == 0) {
+			return 1d;
+		}
+		long newN = n;
+		double ans = 1;
+		if (n < 0) {
+			newN = -1 * (long) n;
+		}
+		while (newN > 0) {
+			if (newN % 2 == 0) {
+				x = x * x;
+				newN = newN / 2;
+			} else {
+				ans = ans * x;
+				newN = newN - 1;
+			}
+		}
+		if (n < 0) {
+			return (double) 1 / (double) ans;
+		}
+		return ans;
+	}
+
 	static int closestNumber(int n, int m) {
 		// find the quotient
 		int q = n / m;
@@ -39,19 +63,24 @@ public class MiscellaneousProblems {
 
 // Driver program to test above
 	public static void main(String args[]) {
-		int n = 13, m = 4;
-		System.out.println(findClosestNumber(n, m));
+//		int n = 13, m = 4;
+//		System.out.println(findClosestNumber(n, m));
+//
+//		n = -15;
+//		m = 6;
+//		System.out.println(findClosestNumber(n, m));
+//
+//		n = 0;
+//		m = 8;
+//		System.out.println(findClosestNumber(n, m));
+//
+//		n = 18;
+//		m = -7;
+//		System.out.println(findClosestNumber(n, m));
+//		Transaction t = new Transaction(null, null, null);
+//		System.out.println(t.amount);
+//		;
 
-		n = -15;
-		m = 6;
-		System.out.println(findClosestNumber(n, m));
-
-		n = 0;
-		m = 8;
-		System.out.println(findClosestNumber(n, m));
-
-		n = 18;
-		m = -7;
-		System.out.println(findClosestNumber(n, m));
+		System.out.println(myPow(2, -2147483648));
 	}
 }

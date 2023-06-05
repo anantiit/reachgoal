@@ -1,0 +1,31 @@
+Pastebin
+Dropbox
+Instagram - 1
+Facebook
+Newsfeed in FaceBook
+Twitter Search
+Youtube
+Netflix 
+Uber backend
+Yelp 
+Ticketmaster 
+API rate limiter
+logger FW
+Parking lot
+Type Ahead Suggestion ()
+Amazon
+Notification system
+Elevator design
+Tic Tac Toe
+Distributed Cache
+Zomato/ Swiggy
+IRCTC
+Payment system (For a ecommerce)
+Patment gateway
+URL shortner 
+Google auto complete
+stock exchange broker
+online games
+cric buzz
+Zoom (1)
+Key generation service

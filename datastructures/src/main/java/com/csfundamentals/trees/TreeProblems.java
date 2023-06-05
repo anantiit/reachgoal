@@ -187,17 +187,17 @@ public class TreeProblems {
 		return leftHeight;
 	}
 
-	int getRightMostElement(Node node) {
+	int getRightMostElementInCompleteBT(Node node) {
 		int h = getLeftHeight(node);
 		// base case will reach when RightMostElement which is our ans is found
 		if (h == 1)
 			return node.data;
 		// ans lies in rightsubtree
 		else if ((h - 1) == getLeftHeight(node.right))
-			return getRightMostElement(node.right);
+			return getRightMostElementInCompleteBT(node.right);
 		// ans lies in left subtree
 		else
-			return getRightMostElement(node.left);
+			return getRightMostElementInCompleteBT(node.left);
 	}
 
 	public static void main(String args[]) {
@@ -208,12 +208,15 @@ public class TreeProblems {
 		root.left.right = new Node(6);
 		root.left.left.left = new Node(4);
 		root.left.left.right = new Node(5);
-		// System.out.println(findPath(root, root.left.left.right, root.left.right));
+		System.out.println(findPath(root, root.left.left.right, root.left.right));
+		List<Node> path = new ArrayList<Node>();
+		findPath(root, root.left.left, path);
+		System.out.println(path);
 		// root.left.right.right = new Node();
 //		root.left.right.left = new Node(1);
 		System.out.println(isBST(root));
 //		System.out.println(getCountBetweenLHInBST(root, 2, 8));
-		// System.out.println(rootToLeafPathSum(root, ""));
+		System.out.println(rootToLeafPathSum(root, ""));
 //		preOrderTraversal(root);
 //		System.out.println();
 //		inOrderTraversal(root);

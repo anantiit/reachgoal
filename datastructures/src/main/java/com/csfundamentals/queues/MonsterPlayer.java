@@ -3,7 +3,8 @@ package com.csfundamentals.queues;
 import java.util.LinkedList;
 
 /*
-Q1) Imagine there is a mxn grid of integers, where some of the cells are occupied by monsters. An empty cell is 0, a cell with monster is 1. We need to find the position in the grid where we need to place a player character such that it is at maximum distance from the nearest monster.
+Q1) Imagine there is a mxn grid of integers, where some of the cells are occupied by monsters. An empty cell is 0, a cell with monster is 1.
+We need to find the position in the grid where we need to place a player character such that it is at maximum distance from the nearest monster.
 
 1 0 0 0 0
 0 0 0 0 0

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * Given 1toN integers in an unsorted arrray we need to sort it.
+ * Given 1toN integers in an unsorted array we need to sort it.
  */
 public class CyclicSort {
 	public static void cyclesort(int[] a) {

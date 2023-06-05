@@ -19,13 +19,13 @@ empid,
  */
 public class TescoFirstRound {
 	private static LinkedList<Shift> findShiftsForACollegue(int EmpId, LinkedList<Shift> shifts) {
-		Collections.sort(shifts, (a, b) -> a.start - b.start);
-		Shift prevShift = shifts.get(0);
-		Shift currShift = null;
+		Collections.sort(shifts, (a, b) -> (a.start == b.start) ? a.end - b.end : a.start - b.start);
 		Iterator<Shift> itr = shifts.iterator();
+		Shift prevShift = itr.next();
+		Shift currShift = null;
 		while (itr.hasNext()) {
 			currShift = itr.next();
-			if (prevShift.end == currShift.start) {
+			if (prevShift.end >= currShift.start) {
 				prevShift.end = currShift.end;
 				itr.remove();
 			} else {
@@ -37,7 +37,7 @@ public class TescoFirstRound {
 
 	public static void main(String[] args) {
 		int Empid = 1;
-		List<Shift> shifts = List.of(new Shift(1, 8, 9), new Shift(1, 10, 12), new Shift(1, 13, 19),
+		List<Shift> shifts = List.of(new Shift(1, 7, 8), new Shift(1, 9, 12), new Shift(1, 13, 19),
 				new Shift(1, 9, 10));
 		LinkedList<Shift> shiftList = new LinkedList<Shift>();
 		shiftList.addAll(shifts);

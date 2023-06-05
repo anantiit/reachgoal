@@ -1,6 +1,57 @@
 package com.algo.searching;
 
 public class BinarySearch {
+
+	public static void main(String args[]) {
+//		System.out.println(mySqrt(1000));
+//		int[] a = { -1, 2, 3, 4, 10, 11 };
+//		int[] aRotated = { 11, 10, 4, -1, 2, 3 };
+//		int[] a1 = { 3, 4, 3, 2, 1 };
+//		int[] a2 = { 2, 9, 12, 16, 25 };
+//		int key = -10;
+////		binarySearch(a, key, 0, a.length - 1, false);
+////		System.out.println("Arr:" + Arrays.toString(a));
+////		System.out.println(findPeakElement(a1));
+//		System.out.println(findCeiling(a2, 1));
+//		System.out.println(findCeiling(a2, 25));
+//		System.out.println(findCeiling(a2, 11));
+//		int[] b = { 1, 2, 3, 5 };
+//		int[] aRotated1 = { 1, 0, 1, 1, 1 };
+//		int[] aRotated2 = { 4, 5, 1, 2, 3 };
+//		int nums[] = { 7, 2, 5, 10, 8 };
+//		int m = 3;
+//		System.out.println(findInMountainArray(b, 3));
+//		System.out.println(findInMountainArray(b, -1));
+//		System.out.println(findInMountainArray(b, 1));
+//		System.out.println(findInRotatedArray(aRotated1, 0));
+//		System.out.println(splitArrayMinLargestSums(nums, m));
+		System.out.println(findFloorCubeRoot(1000000000l));
+	}
+
+	public static long findFloorCubeRoot(long n) {
+		long low = 0;
+		long high = n;
+		long mid = 0;
+		while (low <= high) {
+			// why cant we do this (low+high)/2 , is because low+high can some times cross
+			// the limit of its datatype
+			mid = low + (high - low) / 2;
+			long midCheck = n / (mid * mid);
+			if (mid == midCheck) {
+				return mid;
+			}
+			if (mid < midCheck && (mid + 1) > n / ((mid + 1) * (mid + 1))) {
+				return mid;
+			}
+			if (mid > midCheck) {
+				high = mid - 1;
+			} else {
+				low = mid + 1;
+			}
+		}
+		return mid;
+	}
+
 	public static int findCeiling(int[] a, int key, int left, int right) {
 		int mid = (left + right) / 2;
 		if (mid > 0 && a[mid - 1] <= key && a[mid] >= key) {
@@ -289,27 +340,22 @@ public class BinarySearch {
 		return ans;
 	}
 
-	public static void main(String args[]) {
-		int[] a = { -1, 2, 3, 4, 10, 11 };
-		int[] aRotated = { 11, 10, 4, -1, 2, 3 };
-		int[] a1 = { 3, 4, 3, 2, 1 };
-		int[] a2 = { 2, 9, 12, 16, 25 };
-		int key = -10;
-//		binarySearch(a, key, 0, a.length - 1, false);
-//		System.out.println("Arr:" + Arrays.toString(a));
-//		System.out.println(findPeakElement(a1));
-		System.out.println(findCeiling(a2, 1));
-		System.out.println(findCeiling(a2, 25));
-		System.out.println(findCeiling(a2, 11));
-//		int[] b = { 1, 2, 3, 5 };
-//		int[] aRotated1 = { 1, 0, 1, 1, 1 };
-//		int[] aRotated2 = { 4, 5, 1, 2, 3 };
-//		int nums[] = { 7, 2, 5, 10, 8 };
-//		int m = 3;
-//		System.out.println(findInMountainArray(b, 3));
-//		System.out.println(findInMountainArray(b, -1));
-//		System.out.println(findInMountainArray(b, 1));
-//		System.out.println(findInRotatedArray(aRotated1, 0));
-//		System.out.println(splitArrayMinLargestSums(nums, m));
+	public static int mySqrt(int x) {
+		int low = 1, high = x, ans = 0;
+
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+
+			if (x / mid == mid)
+				return mid;
+			else if (x / mid < mid)
+				high = mid - 1;
+			else {
+				low = mid + 1;
+				ans = mid;
+			}
+		}
+		return ans;
 	}
+
 }

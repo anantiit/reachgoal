@@ -1,12 +1,10 @@
 package com.algo.dynamicprogramming;
 
-import java.util.Arrays;
-
 public class PalindromeSubString {
-	public static int longestPalindromeSubString(String a) {
+	public static String longestPalindromeSubString(String a) {
 		int n = a.length();
 		if (a == null || a.isBlank()) {
-			return 0;
+			return a;
 		}
 		int L[][] = new int[n][n];
 		int max = 1;
@@ -24,8 +22,8 @@ public class PalindromeSubString {
 				maxStart = i;
 				maxEnd = i + 1;
 				palindromeSubStringCount++;
-				System.out.println("Palindrome count :" + palindromeSubStringCount + " max size: " + max
-						+ "substring : " + a.substring(maxStart, maxEnd + 1));
+//				System.out.println("Palindrome count :" + palindromeSubStringCount + " max size: " + max
+//						+ "substring : " + a.substring(maxStart, maxEnd + 1));
 			}
 
 		}
@@ -38,20 +36,20 @@ public class PalindromeSubString {
 					maxStart = i;
 					maxEnd = j;
 					palindromeSubStringCount++;
-					System.out.println("Palindrome count :" + palindromeSubStringCount + " max size: " + max
-							+ "substring : " + a.substring(maxStart, maxEnd + 1));
+//					System.out.println("Palindrome count :" + palindromeSubStringCount + " max size: " + max
+//							+ "substring : " + a.substring(maxStart, maxEnd + 1));
 
-				}
-				else {
+				} else {
 					Math.max(L[i + 1][j], L[i][j - 1]);
 				}
 			}
 		}
-		for (int i = 0; i < n; i++) {
-			System.out.println(Arrays.toString(L[i]));
-		}
-		System.out.println("Palindrome : max size: " + max + "substring : " + a.substring(maxStart, maxEnd + 1));
-		return max;
+//		for (int i = 0; i < n; i++) {
+//			System.out.println(Arrays.toString(L[i]));
+//		}
+		// System.out.println("Palindrome : max size: " + max + "substring : " +
+		// a.substring(maxStart, maxEnd + 1));
+		return a.substring(maxStart, maxEnd + 1);
 	}
 
 	public static void main(String args[]) {

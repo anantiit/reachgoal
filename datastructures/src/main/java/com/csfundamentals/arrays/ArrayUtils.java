@@ -25,7 +25,7 @@ public class ArrayUtils {
 		int arr[] = { 1, 2, 3, 4, 5, 6, 7 };
 		// Output: 3 4 5 6 7 1 2
 		System.out.println(Arrays.toString(arr));
-		int rotateLength = 3;
+		int rotateLength = 4;
 		// rotate(arr, rotateLength);
 		au.leftRotate(arr, rotateLength, arr.length);
 		// System.out.println(Arrays.toString(arr));
@@ -43,6 +43,9 @@ public class ArrayUtils {
 //		rotateMatrix(mat);
 //		System.out.println(mat);
 	}
+
+	// https://www.youtube.com/watch?v=BHr381Guz3Y reverseWholeArray, reverseFirstK,
+	// reversen-K
 
 	void leftRotate(int arr[], int d, int n) {
 		/* To handle if d >= n */

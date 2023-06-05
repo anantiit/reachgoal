@@ -24,6 +24,8 @@ public class NumberOfBinarySearchTrees {
 		}
 		int sum = 0;
 		for (int i = 1; i < n + 1; i++) {
+			// For each root i we form left subtree with numbers less than and right subtree
+			// with numbers greater than it
 			sum = sum + numberOfBinarySearchTrees(i - 1) * numberOfBinarySearchTrees(n - i);
 		}
 		table[n] = sum;

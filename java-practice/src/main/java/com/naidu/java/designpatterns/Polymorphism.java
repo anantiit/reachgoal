@@ -25,21 +25,24 @@ class A {
 }
 
 class B extends A {
+	@Override
 	public void getName() {
 		System.out.println("I am " + this.getClass().getName());
 	}
 
+	@Override
 	public void whoAmI() {
 		System.out.println("I am B");
 	}
 }
 
 class C extends B {
+	@Override
 	public void getName() {
 		System.out.println("I am " + this.getClass().getName());
 	}
 
-	public void whoAmI() {
-		System.out.println("I am C");
-	}
+//	public void whoAmI() {
+//		System.out.println("I am C");
+//	}
 }

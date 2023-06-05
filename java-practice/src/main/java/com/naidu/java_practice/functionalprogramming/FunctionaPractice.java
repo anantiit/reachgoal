@@ -11,7 +11,8 @@ public class FunctionaPractice {
 		List<Integer> nums = List.of(12, 13, 56, 3, 17, 13);
 		var courses = List.of("cs", "ece", "mech", "llb", "spring", "spring boot", "kubernetes", "Docker");
 		printAllNumInStructured(nums);
-//		printAllNumInFunctional(nums);
+		System.out.println("---");
+		printAllNumInFunctional(nums);
 		System.out.println("---");
 		printEvenNumInFunctional(nums);
 		System.out.println("---");
@@ -50,7 +51,7 @@ public class FunctionaPractice {
 	}
 
 	private static void printSquareFunctional(List<Integer> nums) {
-		nums.stream().map(num -> Math.pow(num, 3)).forEach(System.out::println);
+		nums.stream().map(num -> Math.pow(num, 2)).forEach(System.out::println);
 	}
 
 	private static void printEvenNumInFunctional(List<Integer> nums) {

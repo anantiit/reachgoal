@@ -15,7 +15,7 @@ package com.problemsolving.zfsreplicationschedule;
  * 
  */
 public class ZFSReplicationSchedule {
-	public static int DEFAULT_TIME_FRAME = 24;// this should be the one which should communicated to client in SLA
+	public static int DEFAULT_TIME_FRAME = 12;// this should be the one which should communicated to client in SLA
 												// service level agreement
 
 	public static double zfsReplicationTime(int jobOrClientNumber) {
@@ -34,6 +34,6 @@ public class ZFSReplicationSchedule {
 	}
 
 	public static void main(String args[]) {
-		System.out.println(zfsReplicationTime(2));
+		System.out.println(zfsReplicationTime(1));
 	}
 }
