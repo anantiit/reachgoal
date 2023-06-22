@@ -1,4 +1,3 @@
-[![logo](imgs/systemcycle.png)](https://github.com/checkcheckzz/system-design-interview)
 
 > How to prepare system design questions for an IT company
 
