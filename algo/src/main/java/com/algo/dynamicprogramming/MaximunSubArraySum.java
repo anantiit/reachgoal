@@ -4,7 +4,7 @@ public class MaximunSubArraySum {
 	public static int maximunSubArraySum(int[] a) {
 		int n = a.length;
 		int sum = 0;
-		int globalMaxSum = 0;
+		int globalMaxSum = Integer.MIN_VALUE;
 		for (int i = 0; i < n; i++) {
 			sum = Math.max(sum + a[i], a[i]);
 			globalMaxSum = Math.max(globalMaxSum, sum);

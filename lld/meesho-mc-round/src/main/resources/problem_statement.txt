@@ -1,0 +1,89 @@
+/*
+Design online library management system to enable users to borrow and return books. 
+
+Write a driver class to demonstrate the mentioned basic functionalities. Consider how to make the code thread safe and be able to handle concurrency:
+
+Basic Functionalities:
+=====================
+Create Library and Users
+Add book to the library with given number of copies 
+Users should be able to borrow and return a book
+Check if a book is available for borrowing
+When a book is unavailable for borrowing, user should get appropriate message
+Get all users who have currently borrowed a particular book
+
+Constraints:
+===========
+A user can borrow one book at a time - per request
+At any given point in time, User cannot have more than 2 borrowed books.
+
+Sample function signatures. Choose the appropriate argument and return types for the functions:
+==============================================================================================
+createUser(name, contact) -> Returns user_id 
+addBook(name, count) -> success 
+reserveBook(book) -> Success if available, Error message if unavailable.
+returnBook(book) -> success
+getCount(book) -> Returns count. 
+getBorrowers(book) -> List of users
+
+
+Note:
+====
+Use in-memory data structures. Do not use Databases for this interview round
+Handle exceptions gracefully
+Do not implement authentication for the purpose of this interview
+Handle concurrency and race conditions
+Use plain Java code with a driver class to demonstrate(Do not use any framework like Spring)
+Handle all corner cases and validations(Discuss with interviewer about what validations need to done in a real-world scenario)
+No need to create UI
+You can choose and state the rational assumptions of your own
+
+Evaluation criteria:
+===================
+Code should be demonstrable
+Thread safe / concurrency / race conditions
+Approach to solution
+Choice of DataStructures used
+Optimization
+Readability
+Extensibility
+Modularity
+Exception Handling
+Input validation
+
+*/
+
+Models
+User
+UserRole: Student, Faculty, Staff
+Book - 
+Inventory - book_id, count
+Reservation
+ReservationStatus-BOOKS_COLLECTED, CREATED, BOOKS_RETURNED
+
+
+Concurrency:
+modifyingcount of inventory concurrently
+
+Search:
+Trie
+
+
+
+Functionalities
+LibraryManagement
+LibraryApplication
+
+UserService
+createUser(name, contact) -> Returns user_id 
+
+InventoryService
+addBook(name, count) -> success 
+getCount(book) -> Returns count. 
+
+Reservation Service
+reserveBook(book) -> Success if available, Error message if unavailable. check if already books are reserved on his name
+returnBook(book) -> success
+
+
+getBorrowers(book) -> List of users

@@ -25,7 +25,6 @@ public class TreeProblems {
 		if (root.left != null) {
 			inOrderTraversal(root.left);
 		}
-
 		System.out.print(root.data + " ");
 		if (root.right != null) {
 			inOrderTraversal(root.right);
@@ -52,10 +51,10 @@ public class TreeProblems {
 		if (root.left != null) {
 			postOrderTraversal(root.left);
 		}
-		System.out.print(root.data + " ");
 		if (root.right != null) {
 			postOrderTraversal(root.right);
 		}
+		System.out.print(root.data + " ");
 	}
 
 	/*
@@ -91,11 +90,11 @@ public class TreeProblems {
 		if (l <= root.data && root.data <= h) {
 			count++;
 		}
-		if (root.data < h) {
-			count = count + getCountBetweenLHInBST(root.right, l, h);
-		}
 		if (root.data > l) {
 			count = count + getCountBetweenLHInBST(root.left, l, h);
+		}
+		if (root.data < h) {
+			count = count + getCountBetweenLHInBST(root.right, l, h);
 		}
 		return count;
 	}

@@ -7,7 +7,6 @@ public class MaxTubHistogram {
 		int right = n - 1;
 		int maxArea = (right - left) * Math.min(height[left], height[right]);
 		while (left < right) {
-			int tempArea1 = 0;
 			if (height[left] < height[right]) {
 				left++;
 			} else {

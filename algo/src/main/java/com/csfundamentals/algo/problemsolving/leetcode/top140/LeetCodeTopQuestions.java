@@ -1,5 +1,11 @@
 package com.csfundamentals.algo.problemsolving.leetcode.top140;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class LeetCodeTopQuestions {
 	/*
 	 * https://leetcode.com/problems/longest-common-prefix/
@@ -59,12 +65,32 @@ public class LeetCodeTopQuestions {
 		return result;
 	}
 
+	public List<List<String>> groupAnagrams(String[] strs) {
+		List<List<String>> groupedAnagrams = new ArrayList<List<String>>();
+		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		ArrayList<String> anagramList;
+		for (int i = 0; i < strs.length; i++) {
+			char[] charArr = strs[i].toCharArray();
+			Arrays.sort(charArr);
+			String str1 = new String(charArr);
+			anagramList = map.getOrDefault(str1, new ArrayList<String>());
+			anagramList.add(strs[i]);
+			map.put(str1, anagramList);
+		}
+		groupedAnagrams.addAll(map.values());
+		return groupedAnagrams;
+
+	}
+
 	public static void main(String args[]) {
 		LeetCodeTopQuestions lc = new LeetCodeTopQuestions();
-		ListNode head = new ListNode(1);
-		head.next = new ListNode(2);
-		head.next.next = new ListNode(3);
-		System.out.println(lc.removeNthFromEnd(head, 2));
+//		ListNode head = new ListNode(1);
+//		head.next = new ListNode(2);
+//		head.next.next = new ListNode(3);
+//		System.out.println(lc.removeNthFromEnd(head, 2));
+		String[] strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
+		lc.groupAnagrams(strs);
+
 	}
 }
 

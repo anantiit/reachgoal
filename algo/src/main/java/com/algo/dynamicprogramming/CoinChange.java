@@ -28,6 +28,8 @@ public class CoinChange {
 		for (int i = 0; i < n + 1; i++) {
 			dp[i][0] = 1;
 		}
+		// dp[i][j] indicates number of ways to give change for j value using coins
+		// a[0]...a[i-1] i.e first i coins
 		for (int j = 1; j < v + 1; j++) {
 			for (int i = 1; i < n + 1; i++) {
 				if (a[i - 1] <= j) {

@@ -1,6 +1,8 @@
 package com.csfundamentals.java.bitwiseopertors;
 
 public class BitwiseOperatorExamples {
+	private static final double NODE_ID_BIT_LEN = 10;
+
 	public static void main(String[] args) {
 		int arr1[] = { 1, 3, 5 };
 		int n1 = arr1.length;
@@ -13,6 +15,13 @@ public class BitwiseOperatorExamples {
 		// bitwise and
 		// 0101 & 0111=0101 = 5
 		System.out.println("a&b = " + (a & b));
+
+		int maxNodeVal = (int) Math.pow(2, NODE_ID_BIT_LEN);
+		a = 421414214;
+		System.out.println(Integer.toBinaryString(maxNodeVal));
+		System.out.println(Integer.toBinaryString(a));
+		System.out.println("a&b = " + Integer.toBinaryString((a & maxNodeVal)));
+		System.out.println("a&b = " + (a & maxNodeVal));
 
 		// bitwise or
 		// 0101 | 0111=0111 = 7

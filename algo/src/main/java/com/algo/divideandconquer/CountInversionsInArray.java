@@ -47,14 +47,14 @@ public class CountInversionsInArray {
 		Iterator<List<Integer>> itr = queries.iterator();
 		List<Integer> prev = itr.next();
 		modifiedQueries.add(List.of((long) prev.get(0), (long) prev.get(1), (long) prev.get(2)));
-		int le = modifiedQueries.size() - 1;
+		int prevEntry = modifiedQueries.size() - 1;
 		while (itr.hasNext()) {
 			List<Integer> cur = itr.next();
 			if ((prev.get(0) == cur.get(0)) && (prev.get(1) == cur.get(1))) {
-				modifiedQueries.get(le).set(2, modifiedQueries.get(le).get(2) + cur.get(2));
+				modifiedQueries.get(prevEntry).set(2, modifiedQueries.get(prevEntry).get(2) + cur.get(2));
 			} else if (prev.get(1) < cur.get(1)) {
-				modifiedQueries.get(le).set(1, (long) cur.get(0));
-				long midK = modifiedQueries.get(le).get(2) + cur.get(2);
+				modifiedQueries.get(prevEntry).set(1, (long) cur.get(0));
+				long midK = modifiedQueries.get(prevEntry).get(2) + cur.get(2);
 				modifiedQueries.add(List.of((long) cur.get(0), (long) prev.get(1), (long) midK));
 				// modifiedQueries.add(List.of(prev.get(1), cur.get(1), midK));
 			} else {
