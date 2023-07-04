@@ -3,6 +3,7 @@ package com.algo.dynamicprogramming;
 import java.util.Arrays;
 
 public class DynamicProgrammingExamples {
+
 	// Bottomup memoization
 	public static int T(int n) {
 		if (n == 0)
@@ -92,7 +93,7 @@ public class DynamicProgrammingExamples {
 		return table[n];
 	}
 
-	public static int longestIncreasingSubsequence(int[] a) {
+	public static int[] longestIncreasingSubsequence(int[] a) {
 		int n = a.length;
 		int LIS[] = new int[n];
 		LIS[0] = 1;
@@ -115,7 +116,46 @@ public class DynamicProgrammingExamples {
 			System.out.println("i: " + i + " j: " + j + " LIS[i]: " + LIS[i] + " globalLIS: " + globalLIS);
 
 		}
-		return globalLIS;
+		return LIS;
+	}
+
+	public static int[] longestDecreasingSubsequence(int[] a) {
+		int n = a.length;
+		int[] LDS = new int[n + 1];
+		int globalLDS = 0;
+		int j = n - 1;
+		for (int i = n - 1; i >= 0; i--) {
+			LDS[i] = 1;
+			for (j = n - 1; j > i; j--) {
+				if (a[i] >= a[j] && LDS[j] + 1 > LDS[i]) {
+					LDS[i] = LDS[j] + 1;
+					System.out.println("i:" + i + " j:" + j + " LDS[j]:" + LDS[j]);
+
+				}
+
+			}
+			if (globalLDS < LDS[i]) {
+				globalLDS = LDS[i];
+			}
+			System.out.println("i: " + i + " j: " + j + " LDS[i]: " + LDS[i] + " globalLDS: " + globalLDS);
+
+		}
+		return LDS;
+	}
+
+	public static int longestBitonicSubsequence(int[] a) {
+		int n = a.length;
+		int[] LDS = longestDecreasingSubsequence(a);
+		int[] LIS = longestIncreasingSubsequence(a);
+		int globalLBS = 0;
+		for (int i = 0; i < n; i++) {
+			if (globalLBS < LIS[i] + LDS[i] - 1) {
+				globalLBS = LIS[i] + LDS[i] - 1;
+				System.out
+						.println("i: " + i + " LIS[i]: " + LIS[i] + " LDS[i]: " + LDS[i] + " globalLBS: " + globalLBS);
+			}
+		}
+		return globalLBS;
 	}
 
 	public static int fibonacci(int n, int[] fib) {
@@ -132,16 +172,18 @@ public class DynamicProgrammingExamples {
 	}
 
 	public static void main(String args[]) {
-		int arr[] = { 10, 22, 9, 33, 21, 50, 41, 2 };
-		int a[] = { 15, 14, 13, 11, 9, 8, 6, 1 };
-		System.out.println(longestIncreasingSubsequence(a));
+		int[] a = { 10, 22, 9, 33, 21, 50, 41, 2 };
+		int[] a1 = { 15, 14, 13, 11, 9, 8, 6, 1 };
+//		System.out.println(longestIncreasingSubsequence(a));
+//		System.out.println(longestDecreasingSubsequence(a));
+		System.out.println(longestBitonicSubsequence(a));
 		int n = 12;
 //		int[] fib = new int[n + 1];
 //		System.out.println(fibonacci(n, fib));
 //		System.out.println(Arrays.toString(fib));
 		String x = "ABCBDAB";
 		String y = "BDCABC";
-		System.out.println(longestCommonSubsequence(x, y));
+		// System.out.println(longestCommonSubsequence(x, y));
 	}
 
 }

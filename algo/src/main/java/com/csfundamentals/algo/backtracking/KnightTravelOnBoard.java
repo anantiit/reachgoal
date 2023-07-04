@@ -63,7 +63,7 @@ public class KnightTravelOnBoard {
 					return chessBoard[nextX][nextY] = chessBoard[currNode.x][currNode.y] + 1;
 				}
 				if (nextX > n - 1 || nextY > n - 1 || nextX < 0 || nextY < 0 || chessBoard[nextX][nextY] != 0) {
-					continue;
+					continue;// chessBoard[nextX][nextY] is being used to check for visited
 				}
 				Node nextNode = new Node(nextX, nextY);
 				q.add(nextNode);

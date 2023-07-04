@@ -6,6 +6,8 @@ import java.util.List;
 
 public class PersonHeightQueueOrder {
 	public static void main(String[] args) {
+		// Each pair array represents [person height, number of persons who are taller
+		// than him in front]
 		int[][] people = { { 7, 0 }, { 4, 4 }, { 7, 1 }, { 5, 0 }, { 6, 1 }, { 5, 2 } };
 		System.out.println(Arrays.toString(reconstructQueue(people)));
 	}

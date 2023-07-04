@@ -40,7 +40,7 @@ public class PalindromeSubString {
 //							+ "substring : " + a.substring(maxStart, maxEnd + 1));
 
 				} else {
-					Math.max(L[i + 1][j], L[i][j - 1]);
+					L[i][j] = Math.max(L[i + 1][j], L[i][j - 1]);
 				}
 			}
 		}

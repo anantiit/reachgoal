@@ -4,25 +4,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lld.splitwise.account.AccountController;
+import lld.splitwise.account.UserController;
 import lld.splitwise.account.Group;
 import lld.splitwise.account.User;
 
 public class SplitwiseManager {
-	public static void initializeSplitWise(AccountController accountController) {
+	public static void initializeSplitWise(UserController accountController) {
 		createUsers(accountController);
 		createGroups(accountController);
 		addFriends(accountController);
 	}
 
-	private static void addFriends(AccountController accountController) {
+	private static void addFriends(UserController accountController) {
 		accountController.addFriend("u1", "u2");
 		accountController.addFriend("u1", "u2");
 		accountController.addFriend("u1", "u3");
 
 	}
 
-	private static void createGroups(AccountController accountController) {
+	private static void createGroups(UserController accountController) {
 		Set<User> members = new HashSet<User>();
 		members.addAll(List.of(accountController.getUser("u1")));
 		members.addAll(List.of(accountController.getUser("u2")));
@@ -33,7 +33,7 @@ public class SplitwiseManager {
 
 	}
 
-	private static void createUsers(AccountController accountController) {
+	private static void createUsers(UserController accountController) {
 
 		accountController.addOrUpdateUser(new User("u1", "u1", "u1@gmail.com", "12344311434"));
 		accountController.addOrUpdateUser(new User("u2", "u2", "u2@gmail.com", "22344311434"));

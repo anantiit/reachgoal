@@ -10,31 +10,34 @@ public class MinHopsRequired {
 		List<Integer> selectedJumps = new ArrayList<Integer>();
 		selectedJumps.add(0);
 		int ans = 0;
-		if (maxReachable <= 0) {
-			return -1;
-		}
-		for (int i = 0; i < a.length; i++) {
-			if (maxReachable < a.length && maxReachable < i + a[i]) {
-				maxReachable = i + a[i];
-				ans++;
-				selectedJumps.add(i);
+		int maxIndex = 0;
+		for (int i = 1; i < a.length; i++) {
+			if (maxReachable >= a.length - 1) {
+				System.out.println(selectedJumps);
+				return ans;
 			}
-			if (maxReachable <= i && i != a.length - 1) {
+			if (maxReachable < i) {
+				System.out.println(selectedJumps);
 				return -1;
 			}
+			if (maxIndex + a[maxIndex] < i + a[i]) {
+				maxIndex = i;
+			}
+			if (maxReachable == i) {
+				maxReachable = maxIndex + a[maxIndex];
+				ans++;
+				selectedJumps.add(maxIndex);
+			}
 		}
-		if (a.length - 1 > maxReachable) {
-			return -1;
-		}
-		System.out.println(selectedJumps);
 		return ans;
 	}
 
 	public static void main(String args[]) {
-		int arr[] = { 1, 1, 16, 20, 21, 2, 6, 7, 6, 8, 9 };
+		int a3[] = { 1, 1, 3, 20, 1, 1, 1, 1, 1, 1, 1 };
 		int a[] = { 5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0 };
 		int a1[] = { 1, 0, 2 };
+		int a2[] = { 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9 };
 
-		System.out.println(jump(a));
+		System.out.println(jump(a2));
 	}
 }

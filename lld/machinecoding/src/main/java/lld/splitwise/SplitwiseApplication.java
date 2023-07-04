@@ -3,11 +3,11 @@ package lld.splitwise;
 import java.util.ArrayList;
 import java.util.List;
 
-import lld.splitwise.account.AccountController;
+import lld.splitwise.account.UserController;
 import lld.splitwise.account.Group;
 import lld.splitwise.account.User;
-import lld.splitwise.balance.UserBalanceController;
-import lld.splitwise.expense.ExpenseSplitController;
+import lld.splitwise.balance.AccountController;
+import lld.splitwise.expense.ExpenseController;
 import lld.splitwise.expense.ExpenseType;
 import lld.splitwise.split.SplitType;
 import lombok.AllArgsConstructor;
@@ -18,19 +18,19 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SplitwiseApplication {
-	UserBalanceController userBalanceController;
-	ExpenseSplitController expenseSplitController;
-	AccountController accountController;
-	UserBalanceController userBalanceSheetController;
+	AccountController userBalanceController;
+	ExpenseController expenseSplitController;
+	UserController accountController;
+	AccountController userBalanceSheetController;
 
 	public static void main(String[] args) {
-		UserBalanceController userBalanceController = new UserBalanceController();
+		AccountController userBalanceController = new AccountController();
 		SplitwiseApplication splitwiseApplication = new SplitwiseApplication(userBalanceController,
-				new ExpenseSplitController(userBalanceController), new AccountController(),
-				new UserBalanceController());
-		ExpenseSplitController expenseSplitController = splitwiseApplication.getExpenseSplitController();
-		AccountController accountController = splitwiseApplication.getAccountController();
-		UserBalanceController userBalanceSheetController = splitwiseApplication.getUserBalanceSheetController();
+				new ExpenseController(userBalanceController), new UserController(),
+				new AccountController());
+		ExpenseController expenseSplitController = splitwiseApplication.getExpenseSplitController();
+		UserController accountController = splitwiseApplication.getAccountController();
+		AccountController userBalanceSheetController = splitwiseApplication.getUserBalanceSheetController();
 		SplitwiseManager.initializeSplitWise(accountController);
 		User u1 = accountController.getUser("u1");
 		User u2 = accountController.getUser("u2");
