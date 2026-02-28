@@ -50,7 +50,7 @@ public class Test4 {
 				}
 				System.out.println(fileName);
 				if (minimumLength > fileName.length() + 1
-						&& convertFileSizeToIntegerAndCheckifLess(fileSizeStr, MAX_SIZE) && checkDateAbove(fileDate)) {
+						&& convertFileSizeToIntegerAndCheckifLess(fileSizeStr, MAX_SIZE)) { // && checkDateAbove(fileDate) - Method not implemented
 					minimumLength = fileName.length() + 1;
 				}
 			}

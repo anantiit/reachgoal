@@ -89,6 +89,6 @@ public class Test {
 		char[] pArr = p.toCharArray();
 		// System.out.println(match(sArr, pArr, 0, 0));
 		int[] a = { -1, -2 };
-		System.out.println(smallestMissingPositive(a));
+		// System.out.println(smallestMissingPositive(a)); // Method not implemented
 	}
 }

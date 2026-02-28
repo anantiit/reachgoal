@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="parkinglot" />
+        <module name="phonepe" />
+        <module name="stockexchange" />
+        <module name="coffeemachine" />
+        <module name="logger" />
+        <module name="uber" />
+        <module name="foodOrderingSystem" />
+        <module name="hackathonBidgely" />
+        <module name="spring" />
+        <module name="razorpay" />
+        <module name="myntra" />
+        <module name="core-utils" />
+        <module name="datastructures" />
+        <module name="algo" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

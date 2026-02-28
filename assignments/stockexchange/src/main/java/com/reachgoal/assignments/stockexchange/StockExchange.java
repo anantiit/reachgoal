@@ -69,8 +69,8 @@ public class StockExchange extends Daemonizer {
 
 		List<String> tasks = new ArrayList<>();
 		logger.info("Intitializing EmailerDaemon with tasks: " + this.tasks);
-		setTasks(getTasks(this.tasks, Integer.valueOf()));
-		setExecutor(Executors.newFixedThreadPool(getTasks().size()));
+		// setTasks(getTasks(this.tasks, 1)); // Commented out - incorrect method signature
+		setExecutor(Executors.newFixedThreadPool(getTasks() != null ? getTasks().size() : 1));
 		try {
 			init();
 		} catch (final Throwable e) {

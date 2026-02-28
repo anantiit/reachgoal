@@ -32,11 +32,11 @@ public class LinkedListAddition {
 		a.head = prev;
 	}
 
-// 1->2->3	
-//	cur=1 prev=null temp = 1; 1->null cur= 
+// 1->2->3
+//	cur=1 prev=null temp = 1; 1->null cur=
 	public static void main(String args) {
 		LinkedList1 list = new LinkedList1();
-		System.out.println(a);
+		// System.out.println(a); // Variable 'a' not defined
 	}
 }
 

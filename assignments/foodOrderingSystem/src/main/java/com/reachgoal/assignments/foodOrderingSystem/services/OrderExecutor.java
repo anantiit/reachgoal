@@ -11,6 +11,11 @@ import com.reachgoal.assignments.foodOrderingSystem.entities.Order;
 
 public class OrderExecutor implements Runnable {
 	Order order;
+	// TODO: These fields need to be properly initialized
+	private Map<Item, Integer> availableIngrediants = new ConcurrentHashMap<>();
+	private String beverageName = "";
+	private Object machine; // TODO: Define proper type
+	private Map<String, Integer> beverage = new ConcurrentHashMap<>();
 
 	public OrderExecutor(Order order) {
 		super();
@@ -34,13 +39,14 @@ public class OrderExecutor implements Runnable {
 	}
 
 	void serveOrder() {
-		ConcurrentHashMap<String, Integer> availableIngrediants = machine.getTotalIngrediantsMap();
+		// TODO: Implement machine.getTotalIngrediantsMap() properly
+		// ConcurrentHashMap<String, Integer> availableIngrediants = machine.getTotalIngrediantsMap();
 		Iterator<Entry<String, Integer>> beverageIngrediantEntries = beverage.entrySet().iterator();
 		while (beverageIngrediantEntries.hasNext()) {
 			Entry<String, Integer> itemEntry = beverageIngrediantEntries.next();
-			int availableQuantity = availableIngrediants.get(itemEntry.getKey());
-			if (itemEntry.getValue() != null && availableQuantity - itemEntry.getValue() > 0) {
-				availableIngrediants.put(itemEntry.getKey(), availableQuantity - itemEntry.getValue());
+			Integer availableQuantity = availableIngrediants.get(null); // TODO: Fix key
+			if (availableQuantity != null && itemEntry.getValue() != null && availableQuantity - itemEntry.getValue() > 0) {
+				// availableIngrediants.put(itemEntry.getKey(), availableQuantity - itemEntry.getValue());
 			}
 		}
 		System.out.println(beverageName + " is prepared");

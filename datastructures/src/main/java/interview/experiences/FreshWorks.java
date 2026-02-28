@@ -163,7 +163,7 @@ public class FreshWorks {
 			if (phoneDialNum.path.length() >= hopsCount + 1) {
 				uniqueNumbers.add(phoneDialNum.path);
 			} else {
-				Set<Character> set = knightOnPhoneDialMoves.get(phoneDialNum.getDialNum());
+				Set<Character> set = knightOnPhoneDialMoves.get(phoneDialNum.dialNum);
 				Iterator<Character> itr = set.iterator();
 				while (itr.hasNext()) {
 					char cur = itr.next();
@@ -182,4 +182,10 @@ public class FreshWorks {
 class PhoneDialNum {
 	char dialNum;
 	String path;
+
+	// Manual constructor for compatibility
+	public PhoneDialNum(char dialNum, String path) {
+		this.dialNum = dialNum;
+		this.path = path;
+	}
 }

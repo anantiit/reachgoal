@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/algo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/coffeemachine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/coffeemachine/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/foodOrderingSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/foodOrderingSystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/logger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/logger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/myntra/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/myntra/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/parkinglot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/parkinglot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/phonepe/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/phonepe/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/razorpay/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/razorpay/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/stockexchange/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/stockexchange/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/uber/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assignments/uber/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core-utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core-utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/datastructures/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/datastructures/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hackathonBidgely/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hackathonBidgely/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

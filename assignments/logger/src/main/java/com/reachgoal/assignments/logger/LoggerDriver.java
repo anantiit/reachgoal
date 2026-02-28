@@ -32,22 +32,23 @@ public class LoggerDriver {
 			 **/
 			String line = null;
 			List<LoggerConfig> loggerConfigs = new ArrayList<LoggerConfig>();
-			while (line = reader.readLine() != null) {
+			while ((line = reader.readLine()) != null) {
 				String[] configValues = line.split(" ");
-				if(!configValues.isEmpty()) {
-				for(int i=0;i<  configValues.length();i++) {
+				if(configValues.length > 0) {
 					LoggerConfig loggerConfig = new LoggerConfig();
-				switch(configValues[i]) {
-				configValue = configValues[i+1];
-				case TIME_FORMAT: 
-					loggerConfig.setTimeFormat();
-				case LOG_LEVEL:
-			    
+					for(int i=0; i < configValues.length; i++) {
+						String configValue = configValues[i];
+						// TODO: Implement proper switch logic
+						// switch(configValues[i]) {
+						// 	case TIME_FORMAT:
+						// 		loggerConfig.setTimeFormat();
+						// 		break;
+						// 	case LOG_LEVEL:
+						// 		break;
+						// }
+					}
+					loggerConfigs.add(loggerConfig);
 				}
-				}
-				loggerConfigs.add(loggerConfig);
-				}
-				
 			}
 		} catch(final FileNotFoundException e) {
 			System.out.println(LOG_CONFIG_FILE + " config file not found. Hence exiting..");
