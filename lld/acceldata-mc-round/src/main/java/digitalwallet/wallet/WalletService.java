@@ -14,7 +14,6 @@ public class WalletService {
 	public boolean createWallet(String name, String emailId, String phoneNum) {
 		String walletId = WalletIdGenerator.generateId().toString();
 		userService.createUser(name, emailId, phoneNum, walletId);
-		userService.createWallet(user);
 		return true;
 	}
 

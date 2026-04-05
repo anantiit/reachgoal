@@ -182,10 +182,4 @@ public class FreshWorks {
 class PhoneDialNum {
 	char dialNum;
 	String path;
-
-	// Manual constructor for compatibility
-	public PhoneDialNum(char dialNum, String path) {
-		this.dialNum = dialNum;
-		this.path = path;
-	}
 }

@@ -1,8 +1,9 @@
-/target/
+target/
+.vscode/
 .classpath
 .project
 .settings
-.idea
+.idea/
 /bin/
 .mvn/
 mvnw

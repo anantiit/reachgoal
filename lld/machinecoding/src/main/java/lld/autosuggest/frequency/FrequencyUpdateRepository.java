@@ -27,7 +27,5 @@ public class FrequencyUpdateRepository {
 
         // Execute the batch statement
         session.execute(batch);
-    }
 	}
-
 }

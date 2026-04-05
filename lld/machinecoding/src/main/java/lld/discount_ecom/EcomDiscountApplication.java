@@ -146,6 +146,7 @@ public class EcomDiscountApplication {
 	        List<DiscountStrategy> strategies = new ArrayList<>();
 	        strategies.add(new PercentageDiscountStrategy(10.0, 2));
 	        strategies.add(new FixedAmountDiscountStrategy(20.0, 1));
-	        strategies.add(new FixedAmountDiscountStrategy(30.
+	        // strategies.add(new FixedAmountDiscountStrategy(30.0, 3));
 	    }
+	}
 }

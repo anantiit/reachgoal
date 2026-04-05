@@ -14,7 +14,7 @@ public class VirtualFileSystemManager {
 	}
 
 	public FileInputStream fopen() {
-
+		return null;
 	}
 
 	public String fread(String path) {
@@ -43,7 +43,7 @@ public class VirtualFileSystemManager {
 	}
 
 	public boolean fclose(String fileName) {
-
+		return true;
 	}
 
 	public boolean rename(String path, String modifiedName) {
