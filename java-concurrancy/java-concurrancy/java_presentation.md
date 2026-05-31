@@ -1,6 +1,14 @@
 # **Advanced Java: Concurrency & GC in Production**
 ## Principal Engineer Presentation to Development Team
 
+### Assumptions & Environment
+- **Java Version:** Examples assume **Java 17** as the baseline. Any features that require **Java 21+** (for example, *virtual threads*) are explicitly labeled as such.
+- **Ecosystem:** Core concepts are demonstrated using **plain Java SE**. A few slides include **optional Spring Boot–style examples** (REST controllers, schedulers) to connect the ideas to real-world microservices.
+- **Usage Mode:** This deck is designed for **learning and workshops**:
+  - each major topic includes **concrete code examples** you can paste into a small demo project;
+  - many slides naturally suggest **small exercises** (e.g., “refactor this to use ReadWriteLock”, “add GC logging and inspect the output”).
+- **Scope:** Focus is on **in-process concurrency**, **multi‑JVM coordination**, and **GC/heap behavior** in production JVMs.
+
 ---
 
 ## **TABLE OF CONTENTS**
