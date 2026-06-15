@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Collections & Streams: Architecture to Performance</title>
+    
+    <!-- Fonts for Google Slides look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #f1f3f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin: 0;
+            padding: 40px 0;
+            font-family: 'Open Sans', sans-serif;
+            color: #202124;
+        }
+
+        /* 16:9 Slide Dimensions (Standard Google Slides) */
+        .slide {
+            background-color: #ffffff;
+            width: 1280px;
+            height: 720px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 50px 60px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif;
+            margin-top: 0;
+        }
+        
+        .slide-header {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .slide-header h2 {
+            font-size: 42px;
+            color: #1a73e8;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            font-size: 18px;
+            color: #5f6368;
+            font-weight: 600;
+        }
+
+        /* Content Layouts */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 22px;
+            line-height: 1.5;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 100%;
+        }
+
+        .two-column-wide-left {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 40px;
+            height: 100%;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        .highlight-box {
+            background-color: #e8f0fe;
+            border-left: 6px solid #1a73e8;
+            padding: 15px 20px;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background-color: #fce8e6;
+            border-left: 6px solid #d93025;
+            padding: 15px 20px;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background-color: #e6f4ea;
+            border-left: 6px solid #1e8e3e;
+            padding: 15px 20px;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+        th, td {
+            border: 1px solid #dadce0;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #202124;
+            font-weight: 600;
+        }
+        .winner {
+            color: #1e8e3e;
+            font-weight: bold;
+        }
+
+        /* Code Blocks */
+        pre[class*="language-"] {
+            margin: 0 !important;
+            border-radius: 8px;
+            font-size: 16px !important;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        
+        /* Architecture diagrams */
+        .diagram-container {
+            background: #f8f9fa;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Title Slide Layout */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+        }
+        .title-slide h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .title-slide h3 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: #e8f0fe;
+        }
+        .title-slide .metadata {
+            display: flex;
+            gap: 40px;
+            font-size: 22px;
+            color: #e8f0fe;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1 -->
+    <div class="slide title-slide">
+        <h1>Java Collections & Streams</h1>
+        <h3>Professional Deep Dive for Experienced Developers</h3>
+        <div class="metadata">
+            <span><strong>Presented for:</strong> Principal Engineers & Senior Developers</span>
+            <span><strong>Duration:</strong> 60 minutes</span>
+            <span><strong>Java Version:</strong> 17+</span>
+        </div>
+        <div style="margin-top: 40px; text-align: left; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; width: 80%;">
+            <h4 style="font-size: 24px; margin-bottom: 15px;">Agenda:</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 18px;">
+                <div>• Why Learn Collections & Streams? (3 min)</div>
+                <div>• Queue & Deque (5 min)</div>
+                <div>• Collections Framework Architecture (5 min)</div>
+                <div>• Immutable Collections & Comparators (4 min)</div>
+                <div>• List Implementations Deep Dive (8 min)</div>
+                <div>• Stream API Fundamentals (8 min)</div>
+                <div>• Set Implementations (6 min)</div>
+                <div>• Advanced Stream Operations (8 min)</div>
+                <div>• Map Implementations (10 min)</div>
+                <div>• Parallel Streams & Performance (4 min)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Why Learn Collections & Streams?</h2>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        <div class="content">
+            <p><strong>The Foundation of Professional Java Development</strong></p>
+            <div class="two-column">
+                <div>
+                    <div class="highlight-box" style="margin-bottom: 15px;">
+                        <h4 style="margin-bottom: 10px; color:#1a73e8;">💼 Industry Reality</h4>
+                        <ul style="font-size: 18px;">
+                            <li><strong>95% of Java code</strong> uses Collections in some form</li>
+                            <li><strong>Average enterprise application:</strong> 60-80% of code involves data manipulation</li>
+                            <li><strong>Performance bottlenecks:</strong> 70% originate from poor collection choices</li>
+                            <li><strong>Code reviews:</strong> Collection usage is the #1 commented topic</li>
+                        </ul>
+                    </div>
+                    <div class="success-box">
+                        <h4 style="margin-bottom: 10px; color:#1e8e3e;">💰 Business Value (Real-world Impact)</h4>
+                        <ul style="font-size: 18px;">
+                            <li><strong>Performance:</strong> Choosing right collection = 100-1000x speedup</li>
+                            <li><strong>Scalability:</strong> HashMap vs TreeMap decision affects millions of users</li>
+                            <li><strong>Maintainability:</strong> Stream-based code is 40% more readable than loops</li>
+                            <li><strong>Cost:</strong> Poor collection choice in microservices = $1000s/month in cloud costs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">🚀 Career Impact (Senior → Principal requires)</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li>Deep understanding of data structure performance characteristics</li>
+                        <li>Ability to choose optimal collections for scale (10k vs 10M records)</li>
+                        <li>Expertise in writing clean, maintainable data processing code</li>
+                        <li>Knowledge of concurrent collection patterns for modern applications</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">🎯 What You'll Gain Today</h4>
+                    <ul style="font-size: 18px;">
+                        <li>✅ <strong>Architectural Knowledge:</strong> Internal mechanics of HashMap, ArrayList, ConcurrentHashMap</li>
+                        <li>✅ <strong>Performance Expertise:</strong> When ArrayList is 3000x faster than LinkedList</li>
+                        <li>✅ <strong>Modern Patterns:</strong> Stream API for clean, declarative code</li>
+                        <li>✅ <strong>Production Skills:</strong> Thread-safe collections, parallel processing, optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Collections Framework - Architecture</h2>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        <div class="content">
+            <p><strong>The Foundation (70% of presentation)</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Core Interfaces Hierarchy:</h4>
+                    <ul>
+                        <li>Collection (root) → List, Set, Queue</li>
+                        <li>Map (separate hierarchy)</li>
+                        <li>Iterator pattern for traversal</li>
+                        <li>Java 8+ enhancements: forEach, spliterator, stream</li>
+                    </ul>
+                    <h4 style="margin-top: 20px; margin-bottom: 10px; color:#1a73e8;">Design Principles:</h4>
+                    <ul>
+                        <li>Interface-based programming</li>
+                        <li>Consistent API across implementations</li>
+                        <li>Performance characteristics documented</li>
+                        <li>Fail-fast iterators (except concurrent collections)</li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <strong>Key Insight:</strong> Choice of implementation affects performance by orders of magnitude
+                    </div>
+                </div>
+                <div class="diagram-container">
+                    <!-- Pure SVG Architecture Diagram -->
+                    <svg viewBox="0 0 400 400" width="100%" height="100%">
+                        <rect x="150" y="20" width="100" height="40" rx="20" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+                        <text x="200" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1a73e8" text-anchor="middle">Collection</text>
+                        
+                        <path d="M200 60 L200 80 L80 80 L80 100" fill="none" stroke="#bdc1c6" stroke-width="2"/>
+                        <path d="M200 60 L200 100" fill="none" stroke="#bdc1c6" stroke-width="2"/>
+                        <path d="M200 60 L200 80 L320 80 L320 100" fill="none" stroke="#bdc1c6" stroke-width="2"/>
+
+                        <!-- List -->
+                        <rect x="30" y="100" width="100" height="40" rx="20" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+                        <text x="80" y="125" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1a73e8" text-anchor="middle">List</text>
+                        <text x="80" y="160" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">ArrayList</text>
+                        <text x="80" y="180" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">LinkedList</text>
+
+                        <!-- Set -->
+                        <rect x="150" y="100" width="100" height="40" rx="20" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+                        <text x="200" y="125" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1a73e8" text-anchor="middle">Set</text>
+                        <text x="200" y="160" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">HashSet</text>
+                        <text x="200" y="180" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">TreeSet</text>
+
+                        <!-- Queue -->
+                        <rect x="270" y="100" width="100" height="40" rx="20" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+                        <text x="320" y="125" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1a73e8" text-anchor="middle">Queue</text>
+                        <text x="320" y="160" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">PriorityQueue</text>
+                        <text x="320" y="180" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">ArrayDeque</text>
+
+                        <!-- Map -->
+                        <line x1="50" y1="230" x2="350" y2="230" stroke="#dadce0" stroke-width="2" stroke-dasharray="5,5"/>
+                        <text x="200" y="220" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">Separate Hierarchy</text>
+
+                        <rect x="150" y="250" width="100" height="40" rx="20" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+                        <text x="200" y="275" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1a73e8" text-anchor="middle">Map</text>
+                        <text x="200" y="310" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">HashMap</text>
+                        <text x="200" y="330" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">TreeMap</text>
+                        <text x="200" y="350" font-family="sans-serif" font-size="12" fill="#5f6368" text-anchor="middle">ConcurrentHashMap</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>ArrayList - What/Why/When</h2>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        <div class="content">
+            <p><strong>Dynamic Array Implementation</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What is ArrayList?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Resizable array implementation of List interface</li>
+                        <li>Default capacity: 16, grows by 1.5x (16 → 24 → 36...)</li>
+                        <li>Contiguous memory storage</li>
+                        <li>Random access: O(1), Append: O(1) amortized</li>
+                        <li>Insert/Remove middle: O(n) - shifts elements</li>
+                    </ul>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="success-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#1e8e3e; font-size:16px;">💡 Why Use / ✅ When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Lightning-fast random access by index</li>
+                                <li>Memory efficient (Only 4 bytes overhead)</li>
+                                <li>Best cache locality</li>
+                                <li>Reading > modifying</li>
+                                <li>Appending to end</li>
+                                <li>Default choice - 99% of use cases</li>
+                            </ul>
+                        </div>
+                        <div class="warning-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#d93025; font-size:16px;">❌ Don't Use When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Frequent insertions at beginning (O(n) shifts)</li>
+                                <li>Middle insertions common</li>
+                                <li>Need thread-safety (use CopyOnWriteArrayList)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Diagram Requested -->
+                    <svg viewBox="0 0 500 60" style="margin-top:10px; width:100%;" aria-label="ArrayList Memory Model">
+                        <text x="250" y="15" font-size="12" font-family="monospace" fill="#5f6368" text-anchor="middle">Contiguous Memory Allocation (Index 0 to capacity-1)</text>
+                        <g transform="translate(75, 25)">
+                            <rect x="0" y="0" width="45" height="30" fill="#1a73e8" rx="2"/>
+                            <text x="22.5" y="20" fill="white" font-size="12" font-weight="bold" text-anchor="middle">0</text>
+                            <rect x="47" y="0" width="45" height="30" fill="#1a73e8" rx="2"/>
+                            <text x="69.5" y="20" fill="white" font-size="12" font-weight="bold" text-anchor="middle">1</text>
+                            <rect x="94" y="0" width="45" height="30" fill="#1a73e8" rx="2"/>
+                            <text x="116.5" y="20" fill="white" font-size="12" font-weight="bold" text-anchor="middle">2</text>
+                            <rect x="141" y="0" width="45" height="30" fill="#1a73e8" rx="2"/>
+                            <text x="163.5" y="20" fill="white" font-size="12" font-weight="bold" text-anchor="middle">3</text>
+                            <rect x="188" y="0" width="45" height="30" fill="#f1f3f4" stroke="#bdc1c6" stroke-dasharray="2" rx="2"/>
+                            <rect x="235" y="0" width="45" height="30" fill="#f1f3f4" stroke="#bdc1c6" stroke-dasharray="2" rx="2"/>
+                            <text x="235" y="20" fill="#5f6368" font-size="10" text-anchor="middle">Unused</text>
+                        </g>
+                    </svg>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Fast random access and append
+List&lt;String&gt; names = new ArrayList&lt;&gt;();
+names.add("Alice");        // O(1)
+names.add("Bob");
+String first = names.get(0); // O(1) - instant
+
+// ✅ GOOD: Pre-size if known capacity
+List&lt;User&gt; users = new ArrayList&lt;&gt;(1000); 
+
+// ❌ ANTI-PATTERN: Insertions at beginning
+for (int i = 0; i < 1000; i++) {
+    // O(n) each time - SLOW! Shifts array right
+    names.add(0, "Item"); 
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>LinkedList - What/Why/When</h2>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        <div class="content">
+            <p><strong>Doubly-Linked Node Structure</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What is LinkedList?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Doubly-linked list: Each node has prev/data/next</li>
+                        <li>Implements List AND Deque</li>
+                        <li>No capacity - grows one node at a time</li>
+                        <li>Random access: O(n), Ends operations: O(1)</li>
+                        <li>Memory: 40 bytes per element (10x ArrayList!)</li>
+                    </ul>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="success-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#1e8e3e; font-size:16px;">💡 Why Use / ✅ When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>O(1) operations at both ends</li>
+                                <li>Queue/Deque implementation (addFirst, removeLast)</li>
+                                <li>No resizing - Grows node-by-node</li>
+                                <li>Efficient iterator-based insertions</li>
+                            </ul>
+                        </div>
+                        <div class="warning-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#d93025; font-size:16px;">❌ Don't Use When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Random access needed (use ArrayList)</li>
+                                <li>Memory constrained (use ArrayList)</li>
+                                <li>General-purpose List (use ArrayList)</li>
+                                <li>Slower iteration (pointer chasing)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Diagram Requested -->
+                    <svg viewBox="0 0 500 60" style="margin-top:10px; width:100%;" aria-label="LinkedList Node Model">
+                        <text x="250" y="15" font-size="12" font-family="monospace" fill="#5f6368" text-anchor="middle">Doubly-Linked Nodes (Fragmented Memory)</text>
+                        <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#bdc1c6" /></marker></defs>
+                        <g transform="translate(60, 25)">
+                            <rect x="0" y="0" width="70" height="25" fill="#f28b82" rx="2"/>
+                            <line x1="20" y1="0" x2="20" y2="25" stroke="white"/><line x1="50" y1="0" x2="50" y2="25" stroke="white"/>
+                            <text x="35" y="17" fill="white" font-size="12" font-weight="bold" text-anchor="middle">A</text>
+                            
+                            <path d="M 70 8 L 130 8" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+                            <path d="M 130 17 L 70 17" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+
+                            <rect x="130" y="0" width="70" height="25" fill="#f28b82" rx="2"/>
+                            <line x1="150" y1="0" x2="150" y2="25" stroke="white"/><line x1="180" y1="0" x2="180" y2="25" stroke="white"/>
+                            <text x="165" y="17" fill="white" font-size="12" font-weight="bold" text-anchor="middle">B</text>
+
+                            <path d="M 200 8 L 260 8" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+                            <path d="M 260 17 L 200 17" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+
+                            <rect x="260" y="0" width="70" height="25" fill="#f28b82" rx="2"/>
+                            <line x1="280" y1="0" x2="280" y2="25" stroke="white"/><line x1="310" y1="0" x2="310" y2="25" stroke="white"/>
+                            <text x="295" y="17" fill="white" font-size="12" font-weight="bold" text-anchor="middle">C</text>
+                        </g>
+                    </svg>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Using as Deque (queue ops)
+Deque&lt;String&gt; queue = new LinkedList&lt;&gt;();
+queue.addFirst("First");  // O(1)
+queue.addLast("Last");    // O(1)
+String head = queue.removeFirst(); // O(1)
+
+// ❌ ANTI-PATTERN: Random access
+LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+list.add("A"); list.add("B"); // ... 1000 items
+// O(n) - traverses 500 nodes to find it!
+String middle = list.get(500); 
+
+// Reality Check: ArrayList beats LinkedList 
+// 99% of the time. Only use LinkedList for 
+// specific deque operations!</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>ArrayList vs LinkedList - The Verdict</h2>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        <div class="content">
+            <p><strong>Performance Showdown (100,000 elements)</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>ArrayList</th>
+                        <th>LinkedList</th>
+                        <th>Winner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Random Access</strong></td>
+                        <td>0.002 ms</td>
+                        <td>2,500 ms</td>
+                        <td class="winner">ArrayList 1,000,000x faster!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Add at End</strong></td>
+                        <td>2 ms</td>
+                        <td>5 ms</td>
+                        <td class="winner">ArrayList 2.5x faster</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Add at Beginning</strong></td>
+                        <td>150 ms</td>
+                        <td>0.001 ms</td>
+                        <td class="winner" style="color: #ea4335;">LinkedList 150,000x faster</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Iteration</strong></td>
+                        <td>Fast (cache)</td>
+                        <td>Slow (pointers)</td>
+                        <td class="winner">ArrayList 3-5x faster</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Memory (1000 ints)</strong></td>
+                        <td>4 KB</td>
+                        <td>40 KB</td>
+                        <td class="winner">ArrayList 10x efficient</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h3 style="margin-bottom: 10px; color:#1a73e8;">🎯 The Verdict</h3>
+                <p style="margin:0;"><strong>Default to ArrayList</strong> - Faster in almost all scenarios.</p>
+                <p style="margin:0;"><strong>Use LinkedList only for:</strong> addFirst/removeFirst operations (queue/deque).</p>
+                <p style="margin:0; font-size: 16px; margin-top: 10px;"><em>Production Tip: If unsure, choose ArrayList. Benchmark if performance critical.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>HashSet - What/Why/When</h2>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        <div class="content">
+            <p><strong>Hash Table-Based Unique Collection</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What is HashSet?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Backed by HashMap (elements = keys, dummy value)</li>
+                        <li>Default capacity: 16, load factor: 0.75</li>
+                        <li>Hash-based: No guaranteed order</li>
+                        <li>O(1) add, remove, contains</li>
+                        <li>Java 8+: Bins convert to trees when > 8 elements</li>
+                    </ul>
+                    
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">💡 Why Use HashSet?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>✅ <strong>Automatic uniqueness</strong> - No manual duplicate checking</li>
+                        <li>✅ <strong>O(1) lookups</strong> - Instant membership testing</li>
+                        <li>✅ <strong>Fast add/remove</strong> - Constant time operations</li>
+                        <li>✅ <strong>Set operations</strong> - Union, intersection, difference</li>
+                    </ul>
+                    
+                    <h4 style="margin-bottom: 5px; color:#d93025;">❌ Don't Use When:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Need ordering (use LinkedHashSet or TreeSet)</li>
+                        <li>Allow duplicates (use List)</li>
+                        <li>Need index access (use List)</li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Remove duplicates
+List&lt;String&gt; withDupes = Arrays.asList("A", "B", "A", "C");
+Set&lt;String&gt; unique = new HashSet&lt;&gt;(withDupes);
+// unique = [A, B, C] - duplicates removed
+
+// ✅ GOOD: Fast membership check - O(1)
+Set&lt;String&gt; validCodes = new HashSet&lt;&gt;(
+    Arrays.asList("US", "UK", "CA")
+);
+if (validCodes.contains("US")) { // Instant!
+    processOrder();
+}
+
+// ✅ GOOD: Set operations
+Set&lt;Integer&gt; set1 = new HashSet&lt;&gt;(Arrays.asList(1, 2, 3));
+Set&lt;Integer&gt; set2 = new HashSet&lt;&gt;(Arrays.asList(3, 4, 5));
+
+set1.retainAll(set2); // Intersection: {3}
+// set1.addAll(set2); // Union
+// set1.removeAll(set2); // Difference</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Set Implementations - Comparison</h2>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        <div class="content">
+            <p><strong>LinkedHashSet & TreeSet & EnumSet</strong></p>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div class="highlight-box">
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">LinkedHashSet - What/Why/When</h4>
+                    <p style="margin: 0; font-size: 18px;"><strong>What:</strong> HashSet + insertion order preservation<br>
+                    <strong>Why:</strong> Predictable iteration, ordered unique collection<br>
+                    <strong>When:</strong> ✅ Need unique + insertion order | ✅ Deterministic testing | ❌ Order doesn't matter (use HashSet - faster)</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">TreeSet - What/Why/When</h4>
+                    <p style="margin: 0; font-size: 18px;"><strong>What:</strong> Red-Black tree, sorted order, NavigableSet<br>
+                    <strong>Why:</strong> Automatic sorting, range queries (ceiling, floor, subSet)<br>
+                    <strong>When:</strong> ✅ Need sorted unique collection | ✅ Range ops required | ❌ Order not needed (use HashSet - 3-5x faster)</p>
+                </div>
+                
+                <div class="success-box">
+                    <h4 style="margin-bottom: 5px; color:#1e8e3e;">EnumSet - What/Why/When</h4>
+                    <p style="margin: 0; font-size: 18px;"><strong>What:</strong> Bit vector for enums (1 bit per constant)<br>
+                    <strong>Why:</strong> 64x more memory efficient, O(1) operations, lightning fast<br>
+                    <strong>When:</strong> ✅ <strong>Always use for enum sets</strong> (never HashSet for enums!) | ✅ Flags, permissions, options</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 10px;">
+                <h4 style="margin-bottom: 5px; color:#1a73e8;">Performance (100k operations):</h4>
+                <pre style="font-size: 18px; padding: 10px; border-radius: 4px; background: #f8f9fa;">EnumSet:         5 ms    (bit operations)
+HashSet:        45 ms    (hash operations)
+LinkedHashSet:  52 ms    (hash + linked list)
+TreeSet:       180 ms    (tree operations)</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>hashCode() & equals() Contract</h2>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        <div class="content">
+            <p><strong>Critical for Hash-Based Collections</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">The Contract:</h4>
+                    <ol style="font-size: 18px; margin-bottom: 20px;">
+                        <li>If <code>a.equals(b)</code> is true → <code>a.hashCode() == b.hashCode()</code> MUST be true</li>
+                        <li>If <code>a.hashCode() != b.hashCode()</code> → <code>a.equals(b)</code> MUST be false</li>
+                        <li>Consistency: Multiple invocations return same value if object unchanged</li>
+                    </ol>
+
+                    <h4 style="margin-bottom: 10px; color:#d93025;">Common Mistakes:</h4>
+                    <ul style="font-size: 18px;">
+                        <li>Override equals() but not hashCode() → broken HashMap/HashSet</li>
+                        <li>Mutable keys → lost entries</li>
+                        <li>Poor hash function → all collisions, O(n) performance</li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ BEST PRACTICE: Override both
+public class CustomKey {
+    private final String field1;
+    private final int field2;
+    
+    // Standard equals implementation
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof CustomKey o)) return false;
+        return field2 == o.field2 && 
+               Objects.equals(field1, o.field1);
+    }
+    
+    @Override
+    public int hashCode() {
+        // Generates good hash distribution
+        return Objects.hash(field1, field2);
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>HashMap - What/Why/When</h2>
+            <div class="slide-number">Slide 10</div>
+        </div>
+        <div class="content">
+            <p><strong>The Workhorse of Java Collections</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What is HashMap?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Array of Node&lt;K,V&gt;[] buckets (default: 16, power of 2)</li>
+                        <li>Load factor: 0.75 (resize when 75% full)</li>
+                        <li>O(1) get/put/remove (average case)</li>
+                        <li>Java 8+: Bins → trees when > 8 collisions</li>
+                        <li>Allows: One null key, multiple null values</li>
+                    </ul>
+                    
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">💡 Why Use / ✅ When:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>O(1) key-value lookups - Instant retrieval by key</li>
+                        <li>Need fast key lookups (caching, indexing, counting)</li>
+                        <li>Rich API (Java 8+) - compute, merge, computeIfAbsent</li>
+                        <li>General purpose - Default Map choice</li>
+                    </ul>
+
+                    <!-- Diagram Requested -->
+                    <svg viewBox="0 0 500 80" style="margin-top:10px; width:100%;" aria-label="HashMap Architecture">
+                        <text x="250" y="12" font-size="11" font-family="monospace" fill="#5f6368" text-anchor="middle">Index = (n - 1) &amp; hash | Buckets &amp; Collision Chains</text>
+                        <g transform="translate(70, 20)">
+                            <!-- Buckets -->
+                            <rect x="0" y="0" width="40" height="25" fill="#1a73e8" rx="2"/><text x="20" y="17" fill="white" font-size="12" text-anchor="middle">0</text>
+                            <rect x="50" y="0" width="40" height="25" fill="#1a73e8" rx="2"/><text x="70" y="17" fill="white" font-size="12" text-anchor="middle">1</text>
+                            <rect x="100" y="0" width="40" height="25" fill="#1a73e8" rx="2"/><text x="120" y="17" fill="white" font-size="12" text-anchor="middle">2</text>
+                            <text x="155" y="17" fill="#1a73e8" font-size="16" font-weight="bold">...</text>
+                            
+                            <!-- Collision LinkedList -->
+                            <path d="M 70 25 L 70 35" stroke="#bdc1c6" stroke-width="2"/>
+                            <rect x="55" y="35" width="30" height="15" fill="#8ab4f8" rx="2"/>
+                            <path d="M 70 50 L 70 60" stroke="#bdc1c6" stroke-width="2"/>
+                            <rect x="55" y="60" width="30" height="15" fill="#8ab4f8" rx="2"/>
+                            
+                            <!-- Collision Tree (Java 8+) -->
+                            <path d="M 120 25 L 120 35" stroke="#bdc1c6" stroke-width="2"/>
+                            <circle cx="120" cy="40" r="6" fill="#1a73e8"/>
+                            <path d="M 116 45 L 108 55" stroke="#bdc1c6" stroke-width="2"/>
+                            <path d="M 124 45 L 132 55" stroke="#bdc1c6" stroke-width="2"/>
+                            <circle cx="106" cy="60" r="6" fill="#d93025"/>
+                            <circle cx="134" cy="60" r="6" fill="#1a73e8"/>
+                        </g>
+                    </svg>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Frequency counting
+Map&lt;String, Integer&gt; freq = new HashMap&lt;&gt;();
+for (String word : words) {
+    // Increment counter atomically
+    freq.merge(word, 1, Integer::sum); 
+}
+
+// ✅ GOOD: Caching expensive results
+Map&lt;String, Result&gt; cache = new HashMap&lt;&gt;();
+Result result = cache.computeIfAbsent(key, 
+    k -> expensiveComputation(k));
+
+// ✅ GOOD: Indexing by ID
+Map&lt;Long, User&gt; index = new HashMap&lt;&gt;();
+for (User user : users) {
+    index.put(user.getId(), user);
+}
+User found = index.get(12345L); // O(1) lookup</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>LinkedHashMap - Predictable Iteration</h2>
+            <div class="slide-number">Slide 11</div>
+        </div>
+        <div class="content">
+            <p><strong>HashMap with Ordering</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Two Ordering Modes:</h4>
+                    <ol style="font-size: 18px; margin-bottom: 20px;">
+                        <li><strong>Insertion order (default):</strong> Elements returned in insertion sequence</li>
+                        <li><strong>Access order:</strong> Most recently accessed moves to end (LRU)</li>
+                    </ol>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Use Cases:</h4>
+                    <ul style="font-size: 18px;">
+                        <li>Cache with predictable iteration</li>
+                        <li>Maintaining insertion order (e.g. JSON serialization)</li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ BEST PRACTICE: LRU Cache Implementation
+class LRUCache&lt;K,V&gt; extends LinkedHashMap&lt;K,V&gt; {
+    private final int capacity;
+
+    LRUCache(int capacity) {
+        // initialCap, loadFactor, accessOrder=true
+        super(capacity, 0.75f, true); 
+        this.capacity = capacity;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(
+            Map.Entry&lt;K,V&gt; eldest) {
+        // Evicts oldest entry automatically
+        return size() > capacity;
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>TreeMap - Sorted & Navigable</h2>
+            <div class="slide-number">Slide 12</div>
+        </div>
+        <div class="content">
+            <p><strong>Red-Black Tree Implementation</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Characteristics:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li>O(log n) for get, put, remove</li>
+                        <li>Sorted by keys (Comparable or Comparator)</li>
+                        <li>No null keys (values allowed)</li>
+                        <li>Use Cases: Sorted maps, range queries, timelines</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">NavigableMap Operations:</h4>
+                    <ul style="font-size: 18px;">
+                        <li><code>ceilingKey(key)</code>: Least key >= given key</li>
+                        <li><code>floorKey(key)</code>: Greatest key <= given key</li>
+                        <li><code>higherKey(key)</code>: Least key > given key</li>
+                        <li><code>subMap(from, to)</code>: View between keys</li>
+                        <li><code>headMap(to)</code>: View of keys < to</li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// Time-based mapping example
+TreeMap&lt;LocalDateTime, Event&gt; schedule = 
+    new TreeMap&lt;&gt;();
+    
+schedule.put(time1, event1);
+schedule.put(time2, event2);
+
+// Find the next upcoming event
+LocalDateTime now = LocalDateTime.now();
+Map.Entry&lt;LocalDateTime, Event&gt; next = 
+    schedule.ceilingEntry(now);
+
+// Get all events for today
+SortedMap&lt;LocalDateTime, Event&gt; todayEvents = 
+    schedule.subMap(startOfDay, endOfDay);</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>ConcurrentHashMap - What/Why/When</h2>
+            <div class="slide-number">Slide 13</div>
+        </div>
+        <div class="content">
+            <p><strong>Thread-Safe High-Performance Map</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What is ConcurrentHashMap?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Thread-safe map without global locking</li>
+                        <li>Lock-free reads, CAS + bin-level locking for writes</li>
+                        <li>No null keys or values</li>
+                        <li>Weakly consistent iterators (no ConcurrentModificationException)</li>
+                        <li>Atomic operations: compute, merge, putIfAbsent</li>
+                    </ul>
+                    
+                    <div style="display: flex; gap: 20px;">
+                        <div class="success-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#1e8e3e; font-size:16px;">💡 Why Use / ✅ When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Thread-safe without synchronization</li>
+                                <li>High concurrency (Scales with threads)</li>
+                                <li>Atomic updates (counters, accumulators)</li>
+                                <li>10-100x faster than synchronized HashMap</li>
+                            </ul>
+                        </div>
+                        <div class="warning-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#d93025; font-size:16px;">❌ Don't Use When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Single-threaded (use HashMap)</li>
+                                <li>Need null keys/values</li>
+                                <li>Strict consistency required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Thread-safe counter
+ConcurrentHashMap&lt;String, Long&gt; counters = 
+    new ConcurrentHashMap&lt;&gt;();
+
+// Atomic increment from multiple threads
+counters.merge("requests", 1L, Long::sum); 
+
+// ✅ GOOD: Thread-safe caching
+ConcurrentHashMap&lt;String, User&gt; cache = 
+    new ConcurrentHashMap&lt;&gt;();
+User user = cache.computeIfAbsent(id, 
+    this::loadUserFromDB);
+// Only one thread loads for same id!
+
+// ✅ GOOD: Multi-threaded counting
+words.parallelStream().forEach(word -> 
+    wordCount.merge(word, 1L, Long::sum));</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Java 8+ Map Compute Methods</h2>
+            <div class="slide-number">Slide 14</div>
+        </div>
+        <div class="content">
+            <p><strong>Atomic Operations for Concurrent Updates</strong></p>
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin-bottom:0;"><strong>Advantage:</strong> Atomic, thread-safe, cleaner than the legacy get-check-put pattern.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;"><code>compute(key, BiFunction)</code></h4>
+                    <p style="font-size: 16px; margin-bottom: 5px;">Always computes new value (key present or absent). Atomic.</p>
+                    <pre><code class="language-java">map.compute("counter", 
+    (k, v) -> v == null ? 1 : v + 1);</code></pre>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;"><code>computeIfAbsent(key, Function)</code></h4>
+                    <p style="font-size: 16px; margin-bottom: 5px;">Compute only if key absent. Common pattern: initialize on access.</p>
+                    <pre><code class="language-java">map.computeIfAbsent("key", 
+    k -> expensiveComputation());</code></pre>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;"><code>computeIfPresent(key, BiFunction)</code></h4>
+                    <p style="font-size: 16px; margin-bottom: 5px;">Compute only if key present.</p>
+                    <pre><code class="language-java">map.computeIfPresent("key", 
+    (k, v) -> v * 2);</code></pre>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;"><code>merge(key, value, BiFunction)</code></h4>
+                    <p style="font-size: 16px; margin-bottom: 5px;">Merge new value with existing.</p>
+                    <pre><code class="language-java">map.merge("key", 1, Integer::sum); 
+// Increment counter</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Queue & Deque - What/Why/When</h2>
+            <div class="slide-number">Slide 15</div>
+        </div>
+        <div class="content">
+            <p><strong>FIFO and Double-Ended Queues</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">ArrayDeque - Best Stack/Queue</h4>
+                    <p style="font-size: 16px; margin-bottom: 10px;"><strong>What:</strong> Resizable circular array, O(1) both ends.<br>
+                    <strong>Why:</strong> Faster than Stack & LinkedList, no null restriction.<br>
+                    <strong>When:</strong> ✅ Stack (LIFO), Queue (FIFO), Deque operations</p>
+                    
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">PriorityQueue - Priority Processing</h4>
+                    <p style="font-size: 16px; margin-bottom: 10px;"><strong>What:</strong> Binary heap, O(log n) insert/remove.<br>
+                    <strong>Why:</strong> Automatic priority ordering, smallest element first.<br>
+                    <strong>When:</strong> ✅ Task scheduling, top-K problems</p>
+                    
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">BlockingQueue - Thread-Safe</h4>
+                    <p style="font-size: 16px; margin-bottom: 10px;"><strong>When:</strong> ✅ Multi-threaded work queues, producer-consumer</p>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: ArrayDeque as Stack
+Deque&lt;String&gt; stack = new ArrayDeque&lt;&gt;();
+stack.push("First");
+String top = stack.pop(); 
+
+// ✅ GOOD: Priority task queue
+PriorityQueue&lt;Task&gt; tasks = new PriorityQueue&lt;&gt;(
+    Comparator.comparingInt(Task::getPriority)
+);
+tasks.offer(new Task("Low", 3));
+tasks.offer(new Task("High", 1));
+Task urgent = tasks.poll(); // Gets "High"
+
+// ✅ GOOD: Producer-Consumer
+BlockingQueue&lt;Work&gt; queue = 
+    new ArrayBlockingQueue&lt;&gt;(100);
+// queue.put(work); // Blocks if full
+// Work w = queue.take(); // Blocks if empty</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 16 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Immutable Collections - What/Why/When</h2>
+            <div class="slide-number">Slide 16</div>
+        </div>
+        <div class="content">
+            <p><strong>True Immutability (Java 9+)</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What are Immutable Collections?</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Truly immutable (not just unmodifiable views)</li>
+                        <li>Factory methods: List.of(), Set.of(), Map.of()</li>
+                        <li>No null allowed (NullPointerException)</li>
+                        <li>Thread-safe without synchronization</li>
+                    </ul>
+                    
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">💡 Why Use / ✅ When:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Thread-safe - Share across threads safely</li>
+                        <li>No defensive copies - Return directly from methods</li>
+                        <li>Constant data (configurations, lookup tables)</li>
+                        <li>Map keys/Set elements (ensure hashCode consistency)</li>
+                        <li><em>vs Collections.unmodifiable: List.copyOf() is independent, unmodifiableList() is a view</em></li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Constants
+private static final List&lt;String&gt; STATUS =
+    List.of("PENDING", "APPROVED");
+
+private static final Map&lt;String, String&gt; ERR = 
+    Map.of("E01", "Invalid", "E02", "Missing");
+
+// ✅ GOOD: Return safely (no defensive copy!)
+public List&lt;String&gt; getPermissions() {
+    // Safe!
+    return List.of("READ", "WRITE"); 
+}
+
+// ✅ GOOD: Build then freeze
+List&lt;String&gt; temp = new ArrayList&lt;&gt;();
+// ... build list ...
+// Now immutable independent copy
+List&lt;String&gt; immutable = List.copyOf(temp); </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Comparable vs Comparator</h2>
+            <div class="slide-number">Slide 17</div>
+        </div>
+        <div class="content">
+            <p><strong>Sorting Strategies</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Comparable&lt;T&gt; (Natural Ordering):</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li>Implemented by class itself</li>
+                        <li>Single ordering</li>
+                        <li><code>compareTo(T other)</code></li>
+                        <li>Examples: String, Integer, LocalDate</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Comparator&lt;T&gt; (External Ordering):</h4>
+                    <ul style="font-size: 18px; margin-bottom: 10px;">
+                        <li>External to class, Multiple orderings possible</li>
+                        <li>Functional interface</li>
+                        <li>Factory methods: comparing(), comparingInt/Long()</li>
+                        <li>Utilities: reversed(), nullsFirst(), nullsLast()</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>Performance Tip:</strong> Use primitive specializations (comparingInt vs comparing) to avoid boxing.
+                    </div>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ BEST PRACTICE: Comparator Chaining
+Comparator&lt;Employee&gt; comparator = Comparator
+    .comparingInt(Employee::getAge)
+    .thenComparingDouble(Employee::getSalary)
+    .thenComparing(Employee::getName);
+
+// Usage:
+List&lt;Employee&gt; emps = getEmployees();
+emps.sort(comparator);
+
+// Handling nulls
+Comparator&lt;User&gt; c2 = Comparator
+    .comparing(User::getLastName, 
+        Comparator.nullsLast(
+            String.CASE_INSENSITIVE_ORDER));</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Performance Summary - Collections</h2>
+            <div class="slide-number">Slide 18</div>
+        </div>
+        <div class="content">
+            <p><strong>Decision Matrix</strong></p>
+            <div class="two-column">
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="color:#1a73e8; margin-bottom: 10px;">List:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li><strong>ArrayList:</strong> Default choice (random access, iteration, append)</li>
+                        <li><strong>LinkedList:</strong> Only for deque operations at both ends</li>
+                    </ul>
+                    
+                    <h4 style="color:#1a73e8; margin-bottom: 10px;">Set:</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>HashSet:</strong> Default (uniqueness, no order needed)</li>
+                        <li><strong>LinkedHashSet:</strong> Insertion order required</li>
+                        <li><strong>TreeSet:</strong> Sorted order, range operations</li>
+                        <li><strong>EnumSet:</strong> Enum types only (bit vector, fastest)</li>
+                    </ul>
+                </div>
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="color:#1a73e8; margin-bottom: 10px;">Map:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li><strong>HashMap:</strong> Default (general purpose)</li>
+                        <li><strong>LinkedHashMap:</strong> Insertion/access order (LRU cache)</li>
+                        <li><strong>TreeMap:</strong> Sorted keys, range queries</li>
+                        <li><strong>ConcurrentHashMap:</strong> Thread-safe, high concurrency</li>
+                        <li><strong>EnumMap:</strong> Enum keys (fastest)</li>
+                    </ul>
+
+                    <h4 style="color:#1a73e8; margin-bottom: 10px;">Queue:</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>ArrayDeque:</strong> Stack/queue operations</li>
+                        <li><strong>PriorityQueue:</strong> Priority-based processing</li>
+                        <li><strong>BlockingQueue:</strong> Producer-consumer patterns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 19 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Stream API - What/Why/When</h2>
+            <div class="slide-number">Slide 19</div>
+        </div>
+        <div class="content">
+            <p><strong>Declarative Data Processing</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <h4 style="margin-bottom: 5px; color:#1a73e8;">📌 What are Streams?</h4>
+                    <ul style="font-size: 16px; margin-bottom: 10px;">
+                        <li><strong>NOT a data structure</strong> - Just a pipeline descriptor</li>
+                        <li><strong>No storage</strong> - Conveys elements from source</li>
+                        <li><strong>Lazy evaluation</strong> - Executes only when terminal op called</li>
+                        <li><strong>One-time use</strong> - Consumed after terminal operation</li>
+                    </ul>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <div class="success-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#1e8e3e; font-size:16px;">💡 Why / ✅ When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Declarative (what, not how)</li>
+                                <li>40% more readable</li>
+                                <li>Easy parallelization</li>
+                                <li>Processing collections (filter/map)</li>
+                                <li>Aggregating data</li>
+                            </ul>
+                        </div>
+                        <div class="warning-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#d93025; font-size:16px;">❌ Don't Use When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Simple loops (overhead)</li>
+                                <li>Need to modify source</li>
+                                <li>Complex control flow</li>
+                                <li>Small collections (< 100)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Requested Diagram -->
+                    <svg viewBox="0 0 500 60" style="margin-top:10px; width:100%;" aria-label="Stream Pipeline">
+                        <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#bdc1c6" /></marker></defs>
+                        <text x="250" y="10" font-size="10" font-family="monospace" fill="#5f6368" text-anchor="middle">Pipeline: Source → Intermediate Ops → Terminal Op</text>
+                        <g transform="translate(10, 20)">
+                            <rect x="0" y="0" width="70" height="30" fill="#f28b82" rx="4"/><text x="35" y="19" fill="white" font-size="11" text-anchor="middle">Collection</text>
+                            <path d="M 70 15 L 110 15" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+                            <rect x="110" y="0" width="70" height="30" fill="#8ab4f8" rx="15"/><text x="145" y="19" fill="white" font-size="11" text-anchor="middle">.filter()</text>
+                            <path d="M 180 15 L 220 15" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+                            <rect x="220" y="0" width="70" height="30" fill="#8ab4f8" rx="15"/><text x="255" y="19" fill="white" font-size="11" text-anchor="middle">.map()</text>
+                            <path d="M 290 15 L 330 15" stroke="#bdc1c6" stroke-width="2" marker-end="url(#arrow)"/>
+                            <rect x="330" y="0" width="90" height="30" fill="#1e8e3e" rx="4"/><text x="375" y="19" fill="white" font-size="11" text-anchor="middle">.collect()</text>
+                            <text x="200" y="45" font-size="10" fill="#5f6368" text-anchor="middle">Lazy Operations (No execution)</text>
+                            <text x="375" y="45" font-size="10" fill="#5f6368" text-anchor="middle">Triggers Execution</text>
+                        </g>
+                    </svg>
+                </div>
+                <div>
+<pre><code class="language-java">// ❌ OLD WAY: Imperative (verbose)
+List&lt;String&gt; result = new ArrayList&lt;&gt;();
+for (String n : names) {
+    if (n.length() > 3) {
+        result.add(n.toUpperCase());
+    }
+}
+Collections.sort(result);
+
+// ✅ NEW WAY: Declarative (clean)
+List&lt;String&gt; result = names.stream()
+    .filter(n -> n.length() > 3)
+    .map(String::toUpperCase)
+    .sorted()
+    .collect(Collectors.toList());</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 20 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Stream Operations - Quick Reference</h2>
+            <div class="slide-number">Slide 20</div>
+        </div>
+        <div class="content">
+            <p><strong>Building Stream Pipelines</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Intermediate (lazy, return Stream)</h4>
+<pre><code class="language-java">.filter(n -> n > 10)      // Keep matching
+.map(String::toUpperCase) // Transform
+.flatMap(List::stream)    // Flatten
+.distinct()               // Remove dupes
+.sorted()                 // Natural order
+.limit(5)                 // First 5 elements
+.skip(3)                  // Skip first 3</code></pre>
+                    <h4 style="margin-top: 15px; margin-bottom: 10px; color:#1a73e8;">Terminal (eager, produce result)</h4>
+<pre><code class="language-java">.collect(toList())        // Gather to List
+.forEach(System::print)   // Side-effect
+.reduce(0, Integer::sum)  // Aggregate
+.count()                  // Count elements
+.anyMatch(n -> n > 5)     // Boolean test
+.findFirst()              // First element</code></pre>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Complete Example</h4>
+<pre><code class="language-java">// Top 3 expensive "Electronics"
+List&lt;Product&gt; top3 = products.stream()
+    .filter(p -> "Electronics"
+        .equals(p.getCategory()))
+    .sorted(Comparator
+        .comparing(Product::getPrice)
+        .reversed())
+    .limit(3)
+    .collect(Collectors.toList());
+
+// Count by department
+Map&lt;String, Long&gt; countByDept = 
+    emps.stream()
+    .collect(Collectors.groupingBy(
+        Employee::getDepartment,
+        Collectors.counting()
+    ));</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 21 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Lazy Evaluation & Short-Circuiting</h2>
+            <div class="slide-number">Slide 21</div>
+        </div>
+        <div class="content">
+            <p><strong>Performance Optimization</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Lazy Evaluation:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 20px;">
+                        <li>Intermediate operations not executed until terminal operation</li>
+                        <li>Allows optimization (fusion, loop elimination)</li>
+                        <li>Only processes elements as needed</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Short-Circuiting:</h4>
+                    <p style="font-size: 18px; margin-bottom: 10px;">Operations that can complete without processing entire stream</p>
+                    <ul style="font-size: 18px;">
+                        <li><strong>Intermediate:</strong> <code>limit(n)</code>, <code>takeWhile()</code>, <code>dropWhile()</code></li>
+                        <li><strong>Terminal:</strong> <code>findFirst()</code>, <code>anyMatch()</code>, <code>allMatch()</code></li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// Optimization Example
+list.stream()
+    .filter(n -> {
+        // Will ONLY print until first even 
+        // number is found. It aborts early!
+        System.out.println("Checking " + n);
+        return n % 2 == 0;
+    })
+    .findFirst(); 
+
+// Stops immediately, doesn't process 
+// the entire list. Massive savings on
+// large datasets.</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 22 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Advanced Collectors</h2>
+            <div class="slide-number">Slide 22</div>
+        </div>
+        <div class="content">
+            <p><strong>Powerful Aggregations</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Common Collectors:</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li><code>toList()</code>, <code>toSet()</code>, <code>toMap()</code></li>
+                        <li><code>joining(delimiter)</code></li>
+                        <li><code>counting()</code>, <code>summingInt()</code></li>
+                        <li><code>summarizingInt()</code> (Statistics)</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">groupingBy & partitioningBy:</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>groupingBy:</strong> Like SQL GROUP BY</li>
+                        <li><strong>partitioningBy:</strong> Binary classification (true/false)</li>
+                        <li><strong>Downstream:</strong> Passing a secondary collector</li>
+                    </ul>
+                </div>
+                <div>
+<pre><code class="language-java">// groupingBy (SQL GROUP BY)
+Map&lt;String, List&lt;Employee&gt;&gt; byDept =
+    employees.stream()
+        .collect(Collectors.groupingBy(
+            Employee::getDepartment));
+
+// partitioningBy (Binary)
+Map&lt;Boolean, List&lt;Integer&gt;&gt; evenOdd =
+    nums.stream()
+        .collect(Collectors.partitioningBy(
+            n -> n % 2 == 0));
+
+// Downstream Collectors
+Map&lt;String, Double&gt; avgSalaryByDept =
+    emps.stream()
+        .collect(Collectors.groupingBy(
+            Employee::getDepartment,
+            Collectors.averagingDouble(
+                Employee::getSalary)
+        ));</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 23 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>reduce vs collect</h2>
+            <div class="slide-number">Slide 23</div>
+        </div>
+        <div class="content">
+            <p><strong>Choosing the Right Aggregation</strong></p>
+            <div class="two-column">
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">reduce (Immutable reduction):</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Creates new value in each step</li>
+                        <li>Forms: with/without identity, parallel-friendly combiner</li>
+                        <li><strong>When to Use:</strong> Simple aggregations (sum, product, min, max, concatenation)</li>
+                    </ul>
+<pre><code class="language-java">int sum = numbers.stream()
+    .reduce(0, Integer::sum);
+    
+// BAD for building lists! </code></pre>
+                </div>
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">collect (Mutable reduction):</h4>
+                    <ul style="font-size: 18px; margin-bottom: 15px;">
+                        <li>Mutates container (List, Map, etc.)</li>
+                        <li>More efficient for mutable accumulation</li>
+                        <li><strong>When to Use:</strong> Gathering into collections, complex aggregations, grouping</li>
+                    </ul>
+<pre><code class="language-java">List&lt;String&gt; result = stream
+    .collect(Collectors.toList());
+    
+// FAST for objects!</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 24 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Parallel Streams - Power & Pitfalls</h2>
+            <div class="slide-number">Slide 24</div>
+        </div>
+        <div class="content">
+            <p><strong>Multi-Core Processing</strong></p>
+            <div class="two-column-wide-left">
+                <div>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="success-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#1e8e3e; font-size:16px;">✅ When to Use:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Large datasets (>10,000 elements)</li>
+                                <li>CPU-intensive operations</li>
+                                <li>Independent operations</li>
+                                <li>Stateless operations</li>
+                            </ul>
+                        </div>
+                        <div class="warning-box" style="flex: 1; padding: 10px;">
+                            <h4 style="margin-bottom: 5px; color:#d93025; font-size:16px;">❌ Don't Use When:</h4>
+                            <ul style="font-size: 14px; margin:0;">
+                                <li>Small datasets (overhead > benefit)</li>
+                                <li>I/O-bound operations (blocks ForkJoinPool)</li>
+                                <li>Shared mutable state</li>
+                                <li>Ordered operations critical</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <p style="font-size: 18px;"><strong>Performance:</strong> 2-8x speedup for suitable workloads, measure first!</p>
+                    </div>
+                </div>
+                <div>
+<pre><code class="language-java">// ✅ GOOD: Use reduce for aggregation
+int sum = numbers.parallelStream()
+    .reduce(0, Integer::sum); // Thread-safe!
+
+// ✅ GOOD: Use collect for gathering
+List&lt;Result&gt; res = data.parallelStream()
+    .map(this::expensiveOperation)
+    .collect(Collectors.toList());
+
+// ❌ WRONG: Shared mutable state
+int[] sum = {0};
+numbers.parallelStream()
+    .forEach(n -> sum[0] += n); // RACE CONDITION!</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 25 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Parallel Stream Pitfalls & Solutions</h2>
+            <div class="slide-number">Slide 25</div>
+        </div>
+        <div class="content">
+            <p><strong>Common Mistakes</strong></p>
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#d93025;">Pitfall 1: Shared Mutable State</h4>
+<pre><code class="language-java">// ❌ WRONG: Race condition
+int[] sum = {0};
+IntStream.range(0, 1000).parallel()
+    .forEach(i -> sum[0] += i); 
+// Incorrect result!
+
+// ✅ CORRECT: Thread-safe
+int sum = IntStream.range(0, 1000).parallel()
+    .reduce(0, Integer::sum);</code></pre>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 10px; color:#d93025;">Pitfall 2: Non-thread-safe Collection</h4>
+<pre><code class="language-java">// ❌ WRONG: ArrayList not thread-safe
+List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+IntStream.range(0, 1000).parallel()
+    .forEach(list::add); // Lost elements!
+
+// ✅ CORRECT: Collector handles thread-safety
+List&lt;Integer&gt; list = IntStream.range(0, 1000)
+    .parallel()
+    .boxed()
+    .collect(Collectors.toList());</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 26 -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Key Takeaways & Best Practices</h2>
+            <div class="slide-number">Slide 26</div>
+        </div>
+        <div class="content">
+            <p><strong>Professional Guidelines</strong></p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Collections:</h4>
+                    <ol style="font-size: 16px; padding-left: 20px;">
+                        <li>Program to interfaces: List&lt;T&gt; not ArrayList&lt;T&gt;</li>
+                        <li>ArrayList is default List, HashSet default Set, HashMap default Map</li>
+                        <li>Specify initial capacity if size known</li>
+                        <li>Override hashCode() when overriding equals()</li>
+                        <li>Use immutable collections (List.of) when possible</li>
+                        <li>Use EnumSet/EnumMap for enums</li>
+                        <li>ConcurrentHashMap over synchronized Map</li>
+                    </ol>
+                </div>
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Streams:</h4>
+                    <ol style="font-size: 16px; padding-left: 20px;">
+                        <li>Use for complex data transformations and aggregations</li>
+                        <li>Prefer method references over lambdas</li>
+                        <li>Use primitive streams to avoid boxing</li>
+                        <li>collect() over reduce() for mutable reduction</li>
+                        <li>Don't parallelize prematurely - measure first</li>
+                        <li>Avoid side-effects in stream operations</li>
+                        <li>Use Optional correctly</li>
+                    </ol>
+                </div>
+                <div class="highlight-box" style="background-color: white; border: 1px solid #dadce0;">
+                    <h4 style="margin-bottom: 10px; color:#1a73e8;">Performance:</h4>
+                    <ol style="font-size: 16px; padding-left: 20px; margin-bottom: 20px;">
+                        <li>Choose right collection - impacts performance by orders of magnitude</li>
+                        <li>Parallel streams: large datasets + CPU-intensive only</li>
+                        <li>Measure, don't assume - use benchmarks</li>
+                    </ol>
+                    <h3 style="color:#1a73e8; text-align: center; margin-top: 30px;">Questions?</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+```
